@@ -1,0 +1,11 @@
+.nav_bar {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+  }
+  .nav_bar div {
+    width: 200px;
+    height: 70px;
+  }

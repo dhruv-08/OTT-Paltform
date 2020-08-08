@@ -1,8 +1,10 @@
 *{
     margin:0
 }
+
 .heading{
     color: white;
+    padding-left: 1%;
 }
 .row_posters{
     display: flex;
