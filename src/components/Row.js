@@ -1,10 +1,13 @@
-import { AppBar, Button, Dialog, Divider, IconButton, List, ListItem, ListItemText, makeStyles, Menu, MenuItem, Toolbar, Typography } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import {Dialog, Grid, makeStyles, Menu, MenuItem } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import Data from './Data'
 import axios from '../Axios/axios'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import '../row.css';
+import StarsIcon from '@material-ui/icons/Stars';
+import movieTrailer from 'movie-trailer';
+import ReactPlayer from 'react-player'
 import { Link } from 'react-router-dom';
 const baseURL="https://image.tmdb.org/t/p/original";
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 function Row({title,fetch,large}) {
     const [movies, setmovies] = useState([]);
     const [bool, setbool] = useState([]);
-    const classes = useStyles();
+    const [trailer, settrailer] = useState("");
     const [open, setOpen] =useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClic = (event) => {
@@ -30,17 +33,26 @@ function Row({title,fetch,large}) {
     };
     const handleClose = () => {
         setOpen(false);
+        settrailer("");
     };
     useEffect(() => {
         async function Data(){
             const val=await axios.get(fetch);
-            // console.log(val.data.results);
+            console.log(val.data.results);
             setmovies(val.data.results);
         }
         Data();
     }, [fetch]);
+
     function handleModal(movie){
         setOpen(true);
+        movieTrailer(movie?.name || movie?.title || movie?.original_name)
+        .then((url)=>{
+            settrailer(url);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
         setbool(movie);
     }
     return(
@@ -68,6 +80,26 @@ function Row({title,fetch,large}) {
             </Menu>
             </div>
                 <Data movie={bool}/>
+                <div className="main" >
+                    <Grid container spacing={2}>
+                        <Grid item xs>
+                            <ReactPlayer controls={true} light={true} url={trailer} className="player"/>
+                        </Grid>
+                        <Grid item xs style={{paddingTop:"14%"}}>
+                            <Grid container spacing={3}>
+                            <Grid item xs>
+                                <h1 style={{color:"white"}}><StarsIcon/><span> {bool.vote_average}(Rating)</span></h1>
+                            </Grid>
+                            <Grid item xs>
+                                <h1 style={{color:"white"}}><CalendarTodayIcon/><span> {bool.release_date}</span></h1>
+                            </Grid>
+                            <Grid item xs>
+                            <h1 style={{color:"white"}}>{bool.adult==true?"A":"R"}</h1>
+                            </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    </div>
             </Dialog>
         </div>
     );

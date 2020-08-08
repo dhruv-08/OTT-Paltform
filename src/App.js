@@ -3,11 +3,8 @@ import "./App.css";
 import Banner from './components/Banner';
 import Nav from './components/Nav';
 import Main from "./components/Main"
-import {Switch,Route,Redirect, Link} from 'react-router-dom'
+import {Switch,Route,Redirect} from 'react-router-dom'
 function App() {
-  function HomePage(){
-    return <h1>hello</h1>
-  }
   return( 
   <div className="App">
     <Nav/>

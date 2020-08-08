@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react'
 import axios from '../Axios/axios'
 import request from "../request";
 import '../banner.css'
-import { Button } from '@material-ui/core';
 function Banner() {
     const [movie,setMovie]=useState([]);
-    const [img,setimg]=useState('');
     useEffect(()=>{
         async function req(){
             const mov=await axios.get(request.Trending);
             setMovie(mov.data.results[Math.floor(Math.random()*(mov.data.results.length-1))]);
-            setimg(movie?.backdrop_path);
             return request;
         }
         req();

@@ -1,7 +1,11 @@
 *{
     margin:0
 }
-
+.player{
+    padding-top: 10%;
+    padding-bottom: 8%;
+    padding-left: 2%;
+}
 .heading{
     color: white;
     padding-left: 1%;
@@ -14,6 +18,9 @@
 }
 .row_posters::-webkit-scrollbar {
     display: none;
+  }
+  .di{
+      background-color: #111;
   }
 .row_large{
     width:100%;
