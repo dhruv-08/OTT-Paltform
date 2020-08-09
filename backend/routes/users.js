@@ -9,10 +9,6 @@ router.use(bodyParser.json());
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
-router.get('/g', function(req, res, next) {
-  var data="apple";
-  res.send(data);
-});
 router.post('/signup', (req, res, next) => {
   User.register(new User({username: req.body.username}), 
     req.body.password, (err, user) => {
