@@ -1,4 +1,4 @@
-import {Dialog, Grid, makeStyles, Menu, MenuItem } from '@material-ui/core';
+import {Dialog, Grid, Menu, MenuItem } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import Data from './Data'
 import axios from '../Axios/axios'
@@ -10,15 +10,6 @@ import movieTrailer from 'movie-trailer';
 import ReactPlayer from 'react-player'
 import { Link } from 'react-router-dom';
 const baseURL="https://image.tmdb.org/t/p/original";
-const useStyles = makeStyles((theme) => ({
-    appBar: {
-      position: 'relative',
-    },
-    title: {
-      marginLeft: theme.spacing(2),
-      flex: 1,
-    },
-  }));
 function Row({title,fetch,large}) {
     const [movies, setmovies] = useState([]);
     const [bool, setbool] = useState([]);
@@ -59,7 +50,7 @@ function Row({title,fetch,large}) {
             <h1 className="heading">{title}</h1>
             <div className="row_posters">
             {movies.map(movie=>(
-                    <img key={movie.id} src={`${baseURL}${large==true?movie.poster_path:movie.backdrop_path}`} alt={movie.title} className={large==true?"row_large":"row_poster"} onClick={()=>handleModal(movie)}/>
+                    <img key={movie.id} src={`${baseURL}${large===true?movie.poster_path:movie.backdrop_path}`} alt={movie.title} className={large===true?"row_large":"row_poster"} onClick={()=>handleModal(movie)}/>
             ))}
             </div>
             <Dialog fullScreen open={open} onClose={handleClose}>
@@ -93,7 +84,7 @@ function Row({title,fetch,large}) {
                                 <h1 style={{color:"white"}}><CalendarTodayIcon/><span> {bool.release_date}</span></h1>
                             </Grid>
                             <Grid item xs>
-                            <h1 style={{color:"white"}}>{bool.adult==true?"A":"R"}</h1>
+                            <h1 style={{color:"white"}}>{bool.adult===true?"A":"R"}</h1>
                             </Grid>
                             </Grid>
                         </Grid>

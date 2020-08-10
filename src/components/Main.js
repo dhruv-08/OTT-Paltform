@@ -1,9 +1,13 @@
 import React from 'react'
 import Row from "./Row"
 import request from "../request";
+import Banner from './Banner';
+import Nav from './Nav';
 function Main() {
     return (
         <div>
+            <Nav/>
+             <Banner/>
             <div className="main">
             <Row title="Trending" fetch={request.Trending} large={true}/>
             <Row title="Netflix Original" fetch={request.NetflixOrg}/>
