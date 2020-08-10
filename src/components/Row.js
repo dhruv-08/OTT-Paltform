@@ -9,6 +9,7 @@ import StarsIcon from '@material-ui/icons/Stars';
 import movieTrailer from 'movie-trailer';
 import ReactPlayer from 'react-player'
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 const baseURL="https://image.tmdb.org/t/p/original";
 function Row({title,fetch,large}) {
     const [movies, setmovies] = useState([]);
@@ -26,6 +27,13 @@ function Row({title,fetch,large}) {
         setOpen(false);
         settrailer("");
     };
+    function handleLogout(){
+        Axios.get("/logout")
+              .then(res=>{
+                  console.log(res);
+                  window.location.href = "/";
+              })
+      }
     useEffect(() => {
         async function Data(){
             const val=await axios.get(fetch);
@@ -66,7 +74,7 @@ function Row({title,fetch,large}) {
             >
                 <MenuItem onClick={handleClos}><Link to="logout" style={{textDecoration:"none",color:"black"}}>Profile</Link></MenuItem>
                 <MenuItem onClick={handleClos}><Link to="logout" style={{textDecoration:"none",color:"black"}}>My List</Link></MenuItem>
-                <MenuItem onClick={handleClos}><Link to="logout" style={{textDecoration:"none",color:"black"}}>Log-out</Link></MenuItem>
+                <MenuItem onClick={handleClos}><Link to="/" style={{textDecoration:"none",color:"black"}} onClick={handleLogout} >Log-out</Link></MenuItem>
             </Menu>
             </div>
                 <Data movie={bool}/>
