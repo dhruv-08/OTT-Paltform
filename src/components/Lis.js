@@ -1,22 +1,29 @@
-import {Dialog, Grid, Menu, MenuItem } from '@material-ui/core';
+import { ListItem,List,Dialog, Menu, MenuItem, Grid } from '@material-ui/core'
+import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import Nav from './Nav'
 import Data from './Data'
-import axios from '../Axios/axios'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import '../row.css';
 import StarsIcon from '@material-ui/icons/Stars';
 import movieTrailer from 'movie-trailer';
 import ReactPlayer from 'react-player'
 import { Link } from 'react-router-dom';
-import Axios from 'axios';
 const baseURL="https://image.tmdb.org/t/p/original";
-function Row({title,fetch,large}) {
+function Lis() {
     const [movies, setmovies] = useState([]);
     const [bool, setbool] = useState([]);
-    const [trailer, settrailer] = useState("");
     const [open, setOpen] =useState(false);
+    const [trailer, settrailer] = useState("");
     const [anchorEl, setAnchorEl] = useState(null);
+    useEffect(() => {
+       async function fun(){
+           const val=await Axios.get("/movlist");
+           console.log(val.data[0].list[0].name);
+           setmovies(val.data[0].list);
+       }
+       fun();
+    }, []);
     const handleClic = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -34,14 +41,6 @@ function Row({title,fetch,large}) {
                   window.location.href = "/";
               })
       }
-    useEffect(() => {
-        async function Data(){
-            const val=await axios.get(fetch);
-            setmovies(val.data.results);
-        }
-        Data();
-    }, [fetch]);
-
     function handleModal(movie){
         setOpen(true);
         movieTrailer(movie?.name || movie?.title || movie?.original_name)
@@ -53,15 +52,25 @@ function Row({title,fetch,large}) {
         })
         setbool(movie);
     }
-    return(
-        <div className="row">
-            <h1 className="heading">{title}</h1>
-            <div className="row_posters">
-            {movies.map(movie=>(
-                    <img key={movie.id} src={`${baseURL}${large===true?movie?.poster_path:movie?.backdrop_path}`} alt={movie.title} className={large===true?"row_large":"row_poster"} onClick={()=>handleModal(movie)}/>
-            ))}
-            </div>
-            <Dialog fullScreen open={open} onClose={handleClose}>
+    return (
+        <div>
+           <Nav/>
+           {movies.map(movie=>(
+               <div>
+                    <List component="nav" style={{paddingTop:"50px"}} onClick={()=>handleModal(movie)}>
+                    <ListItem button>
+                    <Grid container>
+                                    <Grid item xs style={{padding:"2%"}}>
+                                    <img style={{width:"300px",height:"300px",paddingLeft:"100px"}} src={`${baseURL}${movie.backdrop_path}`}/>
+                                    </Grid>
+                                    <Grid item xs style={{padding:"7%"}}>
+                                       <h1>{movie.name}</h1>
+                                       <p>{movie.overview}</p>
+                                    </Grid>
+                        </Grid>
+                        </ListItem>
+                    </List>
+                    <Dialog fullScreen open={open} onClose={handleClose}>
             <div className="nav_bar" style={{backgroundColor:"#111",color:"white",position:"fixed"}}>
             <Link style={{textDecoration:"none",color:"red",fontSize:"17px",paddingTop:"0.6%",paddingLeft:"1%"}} onClick={handleClose}>MOVIES TALK</Link>
             <AccountCircleIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClic} style={{paddingTop:"0.6%",paddingRight:"1%"}}/>
@@ -99,8 +108,12 @@ function Row({title,fetch,large}) {
                     </Grid>
                     </div>
             </Dialog>
+                </div>
+            ))}
+           
+          
         </div>
-    );
+    )
 }
 
-export default Row
+export default Lis

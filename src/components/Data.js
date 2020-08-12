@@ -1,7 +1,24 @@
+import Axios from 'axios';
 import React from 'react'
 import '../data.css'
 function Data({movie}) {
-    
+    function handleList(){
+        var e=[
+            {
+                "name":movie?.title || movie?.name || movie?.original_name,
+                "backdrop_path":movie.backdrop_path,
+                "overview":movie.overview,
+                "vote_average":movie.vote_average,
+                "release_date":movie.release_date,
+                "adult":movie.adult
+            }
+        ]
+        console.log(e);
+        Axios.post("/list",{e})
+        .then(res=>{
+            console.log(res);
+        })
+    }
     return (
             <header className="banne"  style={{
                 backgroundSize:"cover",
@@ -12,7 +29,7 @@ function Data({movie}) {
                     <h1 className="title">{movie?.title || movie?.name || movie?.original_name}</h1>
                     <div className="banner__buttons">
                     <button className="banner__button">Play</button>
-                    <button className="banner__button" >My List</button>
+                    <button className="banner__button" onClick={()=>handleList()}>My List</button>
                     </div>
                     <div className="description">
                         {movie.overview}

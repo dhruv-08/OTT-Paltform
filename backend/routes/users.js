@@ -10,14 +10,18 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 router.post('/signup', (req, res, next) => {
-  User.register(new User({username: req.body.username}), 
+  const user=new User({username: req.body.username,admin:req.body.admin})
+  User.register(user, 
     req.body.password, (err, user) => {
+      console.log("hehe");
     if(err) {
+      console.log(err);
       res.statusCode = 500;
       res.setHeader('Content-Type', 'application/json');
       res.json({err: err});
     }
     else {
+      console.log(user);
       passport.authenticate('local')(req, res, () => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -26,11 +30,31 @@ router.post('/signup', (req, res, next) => {
     }
   });
 });
-
+router.get("/movlist",(req,res,next)=>{
+  User.find({username:Logname})
+  .then((user)=>{
+    res.send(user);
+  })
+})
+router.post("/list",(req,res,next)=>{
+  
+  User.find({username:Logname})
+  .then((user)=>{
+    if(user){
+      User.update({username:Logname},{
+        $push:{"list":req.body.e}
+      }, function(err, affected, resp) {
+        console.log(resp);
+     });
+    }
+  });
+});
+var Logname="t";
 router.post('/login', (req, res) => {
   User.findOne({username:req.body.username})
   .then((user)=>{
       if(user){
+        Logname=req.body.username;
         passport.authenticate('local')(req, res, () => {
           res.statusCode = 200;
           res.setHeader('Content-Type', 'application/json');
