@@ -20,7 +20,6 @@ function Forgot() {
     }
     return (
         <div style={{textAlign:"center"}}>
-            <Nav/>
             <div style={{paddingTop:"10%"}}>
            <h1>Forget Password ? Get email to reset password</h1><br/><br/>
            <form noValidate autoComplete="off" onSubmit={(e)=>handleSub(e)}>

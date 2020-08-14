@@ -2,8 +2,9 @@ import Axios from 'axios';
 import React, { useState } from 'react'
 import Icon from '@material-ui/icons/Send';
 import "../App.css";
-import { Button, Dialog,DialogContent, DialogContentText, DialogTitle, Grid, TextField } from '@material-ui/core';
+import { Button, Dialog,DialogContent, DialogContentText, DialogTitle, FormControl, Grid, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, TextField } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 function Login() {
     const history = useHistory()
     const [loguser, setloguser] = useState("");
@@ -15,6 +16,9 @@ function Login() {
     const [open, setOpen] = useState(false);
     const [success, setsuccess] = useState(false);
     const [sign, setsign] = useState(false);
+    const [values, setValues] = React.useState({
+        showPassword: false,
+      });
     const handleClickOpen = () => {
         setOpen(true);
         setTimeout(() => {
@@ -51,9 +55,13 @@ function Login() {
         });
       console.log("hello");
     }
-    // function handleForgot(){
-    //     history.push("/forgot");
-    // }
+    const handleClickShowPassword = () => {
+        setValues({ ...values, showPassword: !values.showPassword });
+      };
+    
+      const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+      };
     async function handleLogin(e){
         e.preventDefault();
         
@@ -115,8 +123,27 @@ function Login() {
                             <h1 className="log">Log-In</h1><br/>
                             <TextField id="outlined-basic" label="Username*" variant="outlined" value={loguser} name="username" onChange={(e)=>setloguser(e.target.value)} style={{width:"400px"}}/><br/><br/>
                             <TextField id="outlined-basic" label="Email*" variant="outlined" value={logemail} name="email" onChange={(e)=>setlogemail(e.target.value)} style={{width:"400px"}}/><br/><br/>
-                            <TextField type="password" id="outlined-basic" label="Password*" variant="outlined" value={logpass} name="password" onChange={(e)=>setlogpass(e.target.value)} style={{width:"400px"}}/><br/><br/>
-                            {/* <Button disabled={!user || !pass}type="submit" variant="contained">SUBMIT</Button> */}
+                            <FormControl variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">Password*</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-password"
+                                type={values.showPassword ? 'text' : 'password'}
+                                value={logpass} name="password" onChange={(e)=>setlogpass(e.target.value)} style={{width:"400px"}}
+                                endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                    >
+                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                                }
+                                labelWidth={70}
+                            />
+                            </FormControl><br/><br/>
                             <Button disabled={!loguser || !logpass} type="submit" variant="contained" color="primary" >Submit<Icon style={{padding:"2%"}}/></Button><Link to="/forget" style={{textDecoration:"none",color:"red",paddingLeft:"3%"}}>Forgot password ?</Link>
                             </form>
                         </Grid>
@@ -128,7 +155,28 @@ function Login() {
                         <h1 className="sign">Sign-Up</h1><br/>
                     <TextField id="outlined-basic" label="Username*" variant="outlined" value={user} name="username" onChange={(e)=>setuser(e.target.value)} style={{width:"400px"}}/><br/><br/>
                     <TextField id="outlined-basic" label="Email*" variant="outlined" value={em} name="email" onChange={(e)=>setem(e.target.value)} style={{width:"400px"}}/><br/><br/>
-                    <TextField type="password" id="outlined-basic" label="Password*" variant="outlined" value={pass} name="password" onChange={(e)=>setpass(e.target.value)} style={{width:"400px"}}/><br/><br/>
+                    <FormControl variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">Password*</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-password"
+                                type={values.showPassword ? 'text' : 'password'}
+                                value={pass} name="password" onChange={(e)=>setpass(e.target.value)} style={{width:"400px"}}
+                                endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                    >
+                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                                }
+                                labelWidth={70}
+                            />
+                            </FormControl><br/><br/>
+                    {/* <TextField type="password" id="outlined-basic" label="Password*" variant="outlined" value={pass} name="password" onChange={(e)=>setpass(e.target.value)} style={{width:"400px"}}/><br/><br/> */}
                     <Button disabled={!user || !pass} type="submit" variant="contained" color="primary" >Submit<Icon style={{padding:"2%"}}/></Button>
                     </form>
                     </Grid>
