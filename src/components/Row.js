@@ -1,42 +1,23 @@
-import {Dialog, Grid, Menu, MenuItem } from '@material-ui/core';
+import {Dialog, Grid} from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import Data from './Data'
 import Nav from './Nav'
 import axios from '../Axios/axios'
-import Link from '@material-ui/core/Link';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import '../row.css';
 import StarsIcon from '@material-ui/icons/Stars';
 import movieTrailer from 'movie-trailer';
 import ReactPlayer from 'react-player'
-import { useHistory } from 'react-router-dom';
-import Axios from 'axios';
 const baseURL="https://image.tmdb.org/t/p/original";
 function Row({title,fetch,large}) {
-    const history = useHistory();
     const [movies, setmovies] = useState([]);
     const [bool, setbool] = useState([]);
     const [trailer, settrailer] = useState("");
     const [open, setOpen] =useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
-    const handleClic = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClos = () => {
-        setAnchorEl(null);
-    };
     const handleClose = () => {
         setOpen(false);
         settrailer("");
     };
-    function handleLogout(){
-        Axios.get("/logout")
-              .then(res=>{
-                  console.log(res);
-                  history.replace("/",null);
-              })
-      }
     useEffect(() => {
        
         async function Data(){
@@ -45,12 +26,6 @@ function Row({title,fetch,large}) {
         }
         Data();
     }, [fetch]);
-    function handlepro(){
-        history.push("/profile");
-    }
-    function handlelis(){
-        history.push("/list");
-    }
     function handleModal(movie){
         setOpen(true);
         movieTrailer(movie?.name || movie?.title || movie?.original_name)

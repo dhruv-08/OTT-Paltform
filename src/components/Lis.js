@@ -1,24 +1,19 @@
-import { ListItem,List,Dialog, Menu, MenuItem, Grid } from '@material-ui/core'
+import { ListItem,List,Dialog, Grid } from '@material-ui/core'
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Nav from './Nav'
 import Data from './Data'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import StarsIcon from '@material-ui/icons/Stars';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import movieTrailer from 'movie-trailer';
 import ReactPlayer from 'react-player'
-import Link from '@material-ui/core/Link';
-import { useHistory } from 'react-router-dom';
 const baseURL="https://image.tmdb.org/t/p/original";
 function Lis() {
-    const history = useHistory();
     const [movies, setmovies] = useState([]);
     const [bool, setbool] = useState([]);
     const [open, setOpen] =useState(false);
     const [trailer, settrailer] = useState("");
-    const [anchorEl, setAnchorEl] = useState(null);
     useEffect(() => {
        async function fun(){
            const val=await Axios.get("/movlist");
@@ -28,23 +23,10 @@ function Lis() {
        }
        fun();
     },[]);
-    const handleClic = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClos = () => {
-        setAnchorEl(null);
-    };
     const handleClose = () => {
         setOpen(false);
         settrailer("");
     };
-    function handleLogout(){
-        Axios.get("/logout")
-              .then(res=>{
-                  console.log(res);
-                  history.replace("/",null);
-              })
-      }
       function handleDelete(movie){
           var arr=[];
           arr=movies;

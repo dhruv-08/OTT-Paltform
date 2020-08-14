@@ -1,7 +1,6 @@
 import { Button, Dialog, DialogContent, DialogContentText, DialogTitle, TextField } from '@material-ui/core'
 import Axios from 'axios';
 import React, { useState } from 'react'
-import Nav from './Nav'
 function Set() {
     const [n, setn] = useState("");
     const [success,setsuccess]=useState(false);
