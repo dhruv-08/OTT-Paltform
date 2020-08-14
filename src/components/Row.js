@@ -73,7 +73,7 @@ function Row({title,fetch,large}) {
             onClose={handleClos}
             >
                 <MenuItem onClick={handleClos}><Link to="logout" style={{textDecoration:"none",color:"black"}}>Profile</Link></MenuItem>
-                <MenuItem onClick={handleClos}><Link to="logout" style={{textDecoration:"none",color:"black"}}>My List</Link></MenuItem>
+                <MenuItem onClick={handleClos}><Link to="/list" style={{textDecoration:"none",color:"black"}}>My List</Link></MenuItem>
                 <MenuItem onClick={handleClos}><Link to="/" style={{textDecoration:"none",color:"black"}} onClick={handleLogout} >Log-out</Link></MenuItem>
             </Menu>
             </div>

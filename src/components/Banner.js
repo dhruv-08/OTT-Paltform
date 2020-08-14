@@ -13,10 +13,11 @@ function Banner() {
         }
         req();
     },[]);
+    var i=0;
     function handleList(){
-        
         var e=[
             {
+                "id":movie.id,
                 "name":movie?.title || movie?.name || movie?.original_name,
                 "backdrop_path":movie.backdrop_path,
                 "overview":movie.overview,

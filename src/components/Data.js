@@ -5,6 +5,7 @@ function Data({movie}) {
     function handleList(){
         var e=[
             {
+                "id":movie.id,
                 "name":movie?.title || movie?.name || movie?.original_name,
                 "backdrop_path":movie.backdrop_path,
                 "overview":movie.overview,

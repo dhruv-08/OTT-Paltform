@@ -36,6 +36,16 @@ router.get("/movlist",(req,res,next)=>{
     res.send(user);
   })
 })
+router.post('/dellist',(req,res,next)=>{
+  User.findOne({username:Logname})
+  .then((user)=>{
+    User.update({username:Logname},{
+      list:req.body.arr
+    }, function(err, affected, resp) {
+      console.log(resp);
+   });
+  })
+});
 router.post("/list",(req,res,next)=>{
   
   User.find({username:Logname})

@@ -6,6 +6,7 @@ import Data from './Data'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import StarsIcon from '@material-ui/icons/Stars';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import movieTrailer from 'movie-trailer';
 import ReactPlayer from 'react-player'
 import { Link } from 'react-router-dom';
@@ -19,11 +20,11 @@ function Lis() {
     useEffect(() => {
        async function fun(){
            const val=await Axios.get("/movlist");
-           console.log(val.data[0].list[0].name);
+        //    console.log(val.data[0].list[0].name);
            setmovies(val.data[0].list);
        }
        fun();
-    }, []);
+    },[]);
     const handleClic = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -41,6 +42,36 @@ function Lis() {
                   window.location.href = "/";
               })
       }
+      function handleDelete(movie){
+          var arr=[];
+          arr=movies;
+          console.log(arr);
+          if(arr.length==0){
+            Axios.post("/dellist",{arr:[]})
+            .then(res=>{
+                console.log(res);
+            });
+            window.location.reload(false);
+          }
+          else{
+          for(var i=0;i<arr.length;i++){
+              console.log(arr[i].id);
+              if(arr[i].id===movie.id){
+                  arr.splice(i,1);
+                  console.log("fjn");
+                  break;
+              }
+          }
+          setmovies(arr);
+          Axios.post("/dellist",{arr})
+            .then(res=>{
+                console.log(res);
+            });
+            window.location.reload(false);
+        }
+          console.log(movies);
+          
+      }
     function handleModal(movie){
         setOpen(true);
         movieTrailer(movie?.name || movie?.title || movie?.original_name)
@@ -57,15 +88,18 @@ function Lis() {
            <Nav/>
            {movies.map(movie=>(
                <div>
-                    <List component="nav" style={{paddingTop:"50px"}} onClick={()=>handleModal(movie)}>
+                    <List component="nav" style={{paddingTop:"50px"}}>
                     <ListItem button>
                     <Grid container>
                                     <Grid item xs style={{padding:"2%"}}>
-                                    <img style={{width:"300px",height:"300px",paddingLeft:"100px"}} src={`${baseURL}${movie.backdrop_path}`}/>
+                                    <img style={{width:"300px",height:"300px",paddingLeft:"100px"}} src={`${baseURL}${movie.backdrop_path}`} onClick={()=>handleModal(movie)}/>
                                     </Grid>
                                     <Grid item xs style={{padding:"7%"}}>
                                        <h1>{movie.name}</h1>
                                        <p>{movie.overview}</p>
+                                    </Grid>
+                                    <Grid item xs style={{paddingTop:"7%"}}>
+                                       <h1><HighlightOffIcon onClick={()=>handleDelete(movie)}/></h1>
                                     </Grid>
                         </Grid>
                         </ListItem>
@@ -82,7 +116,7 @@ function Lis() {
             onClose={handleClos}
             >
                 <MenuItem onClick={handleClos}><Link to="logout" style={{textDecoration:"none",color:"black"}}>Profile</Link></MenuItem>
-                <MenuItem onClick={handleClos}><Link to="logout" style={{textDecoration:"none",color:"black"}}>My List</Link></MenuItem>
+                <MenuItem onClick={handleClos}><Link to="/list" style={{textDecoration:"none",color:"black"}} onClick={()=>setOpen(false)}>My List</Link></MenuItem>
                 <MenuItem onClick={handleClos}><Link to="/" style={{textDecoration:"none",color:"black"}} onClick={handleLogout} >Log-out</Link></MenuItem>
             </Menu>
             </div>
