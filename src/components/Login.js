@@ -16,20 +16,20 @@ function Login() {
         setOpen(true);
         setTimeout(() => {
             setOpen(false);
-          }, 3000);
+          }, 2000);
     };
 
     const handleSuc = () => {
         setsuccess(true);
         setTimeout(() => {
             setsuccess(false);
-          }, 3000);
+          }, 2000);
     };
     const handlesign = () => {
         setsign(true);
         setTimeout(() => {
             setsign(false);
-          }, 3000);
+          }, 2000);
     };
     function handleSignup(e){
         e.preventDefault();
@@ -65,22 +65,39 @@ function Login() {
     }
     return (
          <div className="App" >
-             {success===true && <Alert severity="success">
-                <AlertTitle>Success</AlertTitle>
-                <strong>Sign-up successfully</strong>
-            </Alert>}
-            {sign===true &&<div>
-                <Alert severity="error" style={{transition:"ease-in"}}>
-                <AlertTitle>Already registered</AlertTitle>
-                <strong>check it out!</strong>
-                </Alert>
-                </div>}
-             {open===true &&<div>
-                <Alert severity="error" style={{transition:"ease-in"}}>
-                <AlertTitle>Invalid usename or password</AlertTitle>
-                <strong>check it out!</strong>
-                </Alert>
-                </div>}
+             {success===true && <Dialog
+                    open={true}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description">
+                    <DialogTitle id="alert-dialog-title">Sign-Up Successfully</DialogTitle>
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        <img src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif" style={{width:"200px",height:"150px"}}/>
+                    </DialogContentText>
+                    </DialogContent>
+                </Dialog>}
+            {sign===true &&<Dialog
+                    open={true}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description">
+                    <center><DialogTitle id="alert-dialog-title">Already Registered</DialogTitle></center>
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                    <center><img src="https://www.pngitem.com/pimgs/m/215-2158015_animated-cross-mark-gif-hd-png-download.png" style={{width:"200px",height:"150px"}}/></center>
+                    </DialogContentText>
+                    </DialogContent>
+                </Dialog>}
+             {open===true &&<Dialog
+                    open={true}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description">
+                    <center><DialogTitle id="alert-dialog-title">Invalid username or password</DialogTitle></center>
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                    <center><img src="https://www.pngitem.com/pimgs/m/215-2158015_animated-cross-mark-gif-hd-png-download.png" style={{width:"200px",height:"150px"}}/></center>
+                    </DialogContentText>
+                    </DialogContent>
+                </Dialog>}
                     <Grid container spacing={5} style={{paddingTop:"8%"}}>
                     <Grid item xs></Grid>
                         <Grid item xs>
