@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Icon from '@material-ui/icons/Send';
 import "../App.css";
 import { Button, Dialog,DialogContent, DialogContentText, DialogTitle, Grid, TextField } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 function Login() {
     const history = useHistory()
     const [loguser, setloguser] = useState("");
@@ -51,6 +51,9 @@ function Login() {
         });
       console.log("hello");
     }
+    // function handleForgot(){
+    //     history.push("/forgot");
+    // }
     async function handleLogin(e){
         e.preventDefault();
         
@@ -114,7 +117,7 @@ function Login() {
                             <TextField id="outlined-basic" label="Email*" variant="outlined" value={logemail} name="email" onChange={(e)=>setlogemail(e.target.value)} style={{width:"400px"}}/><br/><br/>
                             <TextField type="password" id="outlined-basic" label="Password*" variant="outlined" value={logpass} name="password" onChange={(e)=>setlogpass(e.target.value)} style={{width:"400px"}}/><br/><br/>
                             {/* <Button disabled={!user || !pass}type="submit" variant="contained">SUBMIT</Button> */}
-                            <Button disabled={!loguser || !logpass} type="submit" variant="contained" color="primary" >Submit<Icon style={{padding:"2%"}}/></Button>
+                            <Button disabled={!loguser || !logpass} type="submit" variant="contained" color="primary" >Submit<Icon style={{padding:"2%"}}/></Button><Link to="/forget" style={{textDecoration:"none",color:"red",paddingLeft:"3%"}}>Forgot password ?</Link>
                             </form>
                         </Grid>
                         <Grid item xs><div className="outer">
