@@ -8,6 +8,10 @@ var User = new Schema({
         default: false,
         require:true
     },
+    email:{
+        type:String,
+        required:true
+    },
     list:[]
 });
 

@@ -3,7 +3,6 @@ import axios from '../Axios/axios'
 import request from "../request";
 import '../banner.css'
 import Axios from 'axios';
-import { Alert, AlertTitle } from '@material-ui/lab';
 import { Dialog, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 function Banner() {
     const [movie,setMovie]=useState([]);
@@ -48,10 +47,10 @@ function Banner() {
                     open={true}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description">
-                    <DialogTitle id="alert-dialog-title">Added in list Successfully</DialogTitle>
+                    <center><DialogTitle id="alert-dialog-title">Added in list Successfully</DialogTitle></center>
                     <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        <img src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif" style={{width:"200px",height:"150px"}}/>
+                    <center><img src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif" alt="success" style={{width:"250px",height:"200px"}}/></center>
                     </DialogContentText>
                     </DialogContent>
                 </Dialog>}

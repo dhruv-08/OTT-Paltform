@@ -3,6 +3,8 @@ var router = express.Router();
 var User=require('../models/user');
 var bodyParser=require('body-parser');
 var passport=require('passport');
+var nodemailer=require('nodemailer');
+const { authenticate } = require('passport');
 /* GET users listing. */
 router.use(bodyParser.json());
 /* GET users listing. */
@@ -10,7 +12,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 router.post('/signup', (req, res, next) => {
-  const user=new User({username: req.body.username,admin:req.body.admin})
+  const user=new User({username: req.body.username,admin:req.body.admin,email:req.body.email})
   User.register(user, 
     req.body.password, (err, user) => {
       console.log("hehe");
@@ -59,6 +61,12 @@ router.post("/list",(req,res,next)=>{
     }
   });
 });
+router.get("/profile",(req,res,next)=>{
+  User.find({username:Logname})
+  .then((user)=>{
+    res.send(user);
+  })
+})
 var Logname="t";
 router.post('/login', (req, res) => {
   User.findOne({username:req.body.username})
@@ -77,8 +85,20 @@ router.post('/login', (req, res) => {
         res.json({success:false});
       }
   })
-  
 });
+router.post('/updatePassword',(req,res,next)=>{
+    User.findOne({username:Logname})
+    .then((user)=>{
+      user.changePassword(req.body.oldpass,req.body.newpass,function(err){
+        if(err){
+          res.send(err);
+        }
+        user.save();
+        res.send("DONE!!");
+      });
+      })
+      .catch((err)=>next(err));
+  });
 router.get('/logout',(req,res,next)=>{
   req.session.destroy();
   res.clearCookie('session_id');

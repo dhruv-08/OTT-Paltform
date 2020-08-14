@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import '../nav.css'
-import { Link} from 'react-router-dom';
+import { Link, useHistory} from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Menu, MenuItem } from '@material-ui/core';
 import Axios from 'axios';
 function Nav() {
+  const history = useHistory();
     const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -14,7 +15,7 @@ function Nav() {
     Axios.get("/logout")
           .then(res=>{
               console.log(res);
-              window.location.href = "/";
+              history.replace("/",null);
           })
   }
   const handleClose = () => {
@@ -31,7 +32,7 @@ function Nav() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
             >
-                <MenuItem onClick={handleClose}><Link to="logout" style={{textDecoration:"none",color:"black"}}>Profile</Link></MenuItem>
+                <MenuItem onClick={handleClose}><Link to="/profile" style={{textDecoration:"none",color:"black"}}>Profile</Link></MenuItem>
                 <MenuItem onClick={handleClose}><Link to="/list" style={{textDecoration:"none",color:"black"}}>My List</Link></MenuItem>
                 <MenuItem onClick={handleClose}><Link to="/" style={{textDecoration:"none",color:"black"}} onClick={handleLogout}>Log-out</Link></MenuItem>
             </Menu>            

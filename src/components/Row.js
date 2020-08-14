@@ -1,17 +1,20 @@
 import {Dialog, Grid, Menu, MenuItem } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import Data from './Data'
+import Nav from './Nav'
 import axios from '../Axios/axios'
+import Link from '@material-ui/core/Link';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import '../row.css';
 import StarsIcon from '@material-ui/icons/Stars';
 import movieTrailer from 'movie-trailer';
 import ReactPlayer from 'react-player'
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 const baseURL="https://image.tmdb.org/t/p/original";
 function Row({title,fetch,large}) {
+    const history = useHistory();
     const [movies, setmovies] = useState([]);
     const [bool, setbool] = useState([]);
     const [trailer, settrailer] = useState("");
@@ -31,25 +34,28 @@ function Row({title,fetch,large}) {
         Axios.get("/logout")
               .then(res=>{
                   console.log(res);
-                  window.location.href = "/";
+                  history.replace("/",null);
               })
       }
     useEffect(() => {
+       
         async function Data(){
             const val=await axios.get(fetch);
             setmovies(val.data.results);
         }
         Data();
     }, [fetch]);
-
+    function handlepro(){
+        history.push("/profile");
+    }
+    function handlelis(){
+        history.push("/list");
+    }
     function handleModal(movie){
         setOpen(true);
         movieTrailer(movie?.name || movie?.title || movie?.original_name)
         .then((url)=>{
             settrailer(url);
-        })
-        .catch((err)=>{
-            console.log(err);
         })
         setbool(movie);
     }
@@ -58,25 +64,12 @@ function Row({title,fetch,large}) {
             <h1 className="heading">{title}</h1>
             <div className="row_posters">
             {movies.map(movie=>(
-                    <img key={movie.id} src={`${baseURL}${large===true?movie?.poster_path:movie?.backdrop_path}`} alt={movie.title} className={large===true?"row_large":"row_poster"} onClick={()=>handleModal(movie)}/>
+                   <img key={movie?.id} src={`${baseURL}${large===true?movie?.poster_path:movie?.backdrop_path}`} alt={movie?.title} className={large===true?"row_large":"row_poster"} onClick={()=>handleModal(movie)}/>
             ))}
             </div>
+            <>
             <Dialog fullScreen open={open} onClose={handleClose}>
-            <div className="nav_bar" style={{backgroundColor:"#111",color:"white",position:"fixed"}}>
-            <Link style={{textDecoration:"none",color:"red",fontSize:"17px",paddingTop:"0.6%",paddingLeft:"1%"}} onClick={handleClose}>MOVIES TALK</Link>
-            <AccountCircleIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClic} style={{paddingTop:"0.6%",paddingRight:"1%"}}/>
-            <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClos}
-            >
-                <MenuItem onClick={handleClos}><Link to="logout" style={{textDecoration:"none",color:"black"}}>Profile</Link></MenuItem>
-                <MenuItem onClick={handleClos}><Link to="/list" style={{textDecoration:"none",color:"black"}}>My List</Link></MenuItem>
-                <MenuItem onClick={handleClos}><Link to="/" style={{textDecoration:"none",color:"black"}} onClick={handleLogout} >Log-out</Link></MenuItem>
-            </Menu>
-            </div>
+            <Nav/>
                 <Data movie={bool}/>
                 <div className="main" >
                     <Grid container spacing={2}>
@@ -99,6 +92,7 @@ function Row({title,fetch,large}) {
                     </Grid>
                     </div>
             </Dialog>
+            </>
         </div>
     );
 }
