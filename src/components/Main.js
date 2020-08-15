@@ -10,7 +10,7 @@ function Main() {
              <Banner/>
             <div className="main">
             <Row title="Trending" fetch={request.Trending} large={true}/>
-            <Row title="Netflix Original" fetch={request.NetflixOrg}/>
+            <Row title="Netflix Original" fetch={request.Thriller}/>
             <Row title="Top Rated" fetch={request.TopRated}/>
             <Row title="Action" fetch={request.Action}/>
             <Row title="Sci-fi" fetch={request.Sci_fi}/>
@@ -19,7 +19,6 @@ function Main() {
             <Row title="Crime" fetch={request.Crime}/>
             <Row title="Horror" fetch={request.Horror}/>
             <Row title="Romance" fetch={request.Romance}/>
-            <Row title="Thriller" fetch={request.Thriller}/>
             <Row title="Animated" fetch={request.Animated}/>
             <Row title="Drama" fetch={request.Drama}/>
             <Row title="Family" fetch={request.Family}/>

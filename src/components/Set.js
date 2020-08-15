@@ -10,6 +10,8 @@ function Set() {
         .then((res)=>{
             console.log(res);
             setn("");
+        }).catch(err=>{
+            console.log(err);
         })
         setn("");
         setsuccess(true);

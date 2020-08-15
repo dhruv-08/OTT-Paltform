@@ -39,7 +39,9 @@ function Row({title,fetch,large}) {
           .then(res=>{
               console.log(res);
               history.replace("/",null);
-          })
+          }).catch(err=>{
+            console.log(err);
+        })
   }
   const handleClos = () => {
     setAnchorEl(null);
@@ -49,6 +51,8 @@ function Row({title,fetch,large}) {
         movieTrailer(movie?.name || movie?.title || movie?.original_name)
         .then((url)=>{
             settrailer(url);
+        }).catch(err=>{
+            console.log(err);
         })
         setbool(movie);
     }
@@ -63,7 +67,7 @@ function Row({title,fetch,large}) {
             <>
             <Dialog fullScreen open={open} onClose={handleClose}>
             <div className="nav_bar" style={{backgroundColor:"#111",color:"white",position:"fixed"}}>
-            <Link style={{textDecoration:"none",color:"red",fontSize:"17px",paddingTop:"0.6%",paddingLeft:"1%"}} onClick={()=>setOpen(false)}>MOVIES TALK</Link>
+            <Link to="/home" style={{textDecoration:"none",color:"red",fontSize:"17px",paddingTop:"0.6%",paddingLeft:"1%"}} onClick={()=>setOpen(false)}>MOVIES TALK</Link>
             <AccountCircleIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{paddingTop:"0.6%",paddingRight:"1%"}}/>
             <Menu
             id="simple-menu"

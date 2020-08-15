@@ -17,7 +17,6 @@ function Lis() {
     useEffect(() => {
        async function fun(){
            const val=await Axios.get("/movlist");
-        //    console.log(val.data[0].list[0].name);
            setmovies(val.data[0].list);
 
        }
@@ -35,7 +34,10 @@ function Lis() {
             Axios.post("/dellist",{arr:[]})
             .then(res=>{
                 console.log(res);
-            });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
             window.location.reload(false);
           }
           else{
@@ -51,7 +53,9 @@ function Lis() {
           Axios.post("/dellist",{arr})
             .then(res=>{
                 console.log(res);
-            });
+            }).catch(err=>{
+                console.log(err);
+            })
             window.location.reload(false);
         }
           console.log(movies);

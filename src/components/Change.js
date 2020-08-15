@@ -14,6 +14,9 @@ function Change() {
             setold("");
             setn("");
         })
+        .catch(err=>{
+            console.log(err);
+        })
         setold("");
         setn("");
         setsuccess(true);

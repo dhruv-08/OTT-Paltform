@@ -16,7 +16,9 @@ function Nav() {
           .then(res=>{
               console.log(res);
               history.replace("/",null);
-          })
+          }).catch(err=>{
+            console.log(err);
+        })
   }
   const handleClose = () => {
     setAnchorEl(null);

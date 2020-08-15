@@ -11,6 +11,9 @@ function Forgot() {
             console.log(res);
             setn("");
         })
+        .catch(err=>{
+            console.log(err);
+        })
         setn("");
         setsuccess(true);
             setTimeout(() => {
