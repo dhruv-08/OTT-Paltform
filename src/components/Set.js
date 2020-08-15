@@ -8,7 +8,6 @@ function Set() {
         e.preventDefault();
         Axios.post("/set",({newpass:n}))
         .then((res)=>{
-            console.log(res);
             setn("");
         }).catch(err=>{
             console.log(err);

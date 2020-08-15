@@ -9,7 +9,6 @@ function Profile() {
     useEffect(() => {
         async function fun(){
             const val=await Axios.get("/profile");
-            console.log(val.data[0].username);
             setname(val.data[0].username);
             setemail(val.data[0].email);
         }

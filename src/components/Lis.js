@@ -33,7 +33,7 @@ function Lis() {
           if(arr.length===0){
             Axios.post("/dellist",{arr:[]})
             .then(res=>{
-                console.log(res);
+                console.log("Done!!");
             })
             .catch(err=>{
                 console.log(err);
@@ -42,23 +42,20 @@ function Lis() {
           }
           else{
           for(var i=0;i<arr.length;i++){
-              console.log(arr[i].id);
               if(arr[i].id===movie.id){
                   arr.splice(i,1);
-                  console.log("fjn");
                   break;
               }
           }
           setmovies(arr);
           Axios.post("/dellist",{arr})
             .then(res=>{
-                console.log(res);
+                console.log("Done!!");
             }).catch(err=>{
                 console.log(err);
             })
             window.location.reload(false);
         }
-          console.log(movies);
           
       }
     function handleModal(movie){

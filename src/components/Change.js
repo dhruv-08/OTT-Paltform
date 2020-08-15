@@ -10,7 +10,6 @@ function Change() {
         e.preventDefault();
         Axios.post("/updatePassword",({oldpass:old,newpass:n}))
         .then((res)=>{
-            console.log(res);
             setold("");
             setn("");
         })

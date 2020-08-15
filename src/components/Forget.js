@@ -8,7 +8,6 @@ function Forgot() {
         e.preventDefault();
         Axios.post("/forgot",({email:n}))
         .then((res)=>{
-            console.log(res);
             setn("");
         })
         .catch(err=>{

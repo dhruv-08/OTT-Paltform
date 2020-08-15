@@ -45,7 +45,6 @@ function Login() {
         e.preventDefault();
         Axios.post("/signup",{username:user,password:pass,email:em})
         .then(res=>{
-            console.log(res);
             setuser("");
             setpass("");
             setem("");
@@ -76,7 +75,6 @@ function Login() {
         
         await Axios.post("/login",{username:loguser,password:logpass,email:logemail})
         .then((res)=>{
-            console.log(res);
             setlogpass("");
             setloguser("");
             setlogemail("");
@@ -87,8 +85,7 @@ function Login() {
         setloguser("");
         setlogemail("");
         handleClickOpen();
-        });    
-      console.log("hel");
+        });
     }
     return (
          <div className="App" >

@@ -14,7 +14,6 @@ function Nav() {
   function handleLogout(){
     Axios.get("/logout")
           .then(res=>{
-              console.log(res);
               history.replace("/",null);
           }).catch(err=>{
             console.log(err);
