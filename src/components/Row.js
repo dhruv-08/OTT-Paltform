@@ -1,15 +1,18 @@
-import {Dialog, Grid} from '@material-ui/core';
+import {Dialog, Grid, Menu, MenuItem} from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import Data from './Data'
-import Nav from './Nav'
+import { Link, useHistory} from 'react-router-dom';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import axios from '../Axios/axios'
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import '../row.css';
+import Axios from 'axios';
 import StarsIcon from '@material-ui/icons/Stars';
 import movieTrailer from 'movie-trailer';
 import ReactPlayer from 'react-player'
 const baseURL="https://image.tmdb.org/t/p/original";
 function Row({title,fetch,large}) {
+    const history = useHistory();
     const [movies, setmovies] = useState([]);
     const [bool, setbool] = useState([]);
     const [trailer, settrailer] = useState("");
@@ -26,6 +29,21 @@ function Row({title,fetch,large}) {
         }
         Data();
     }, [fetch]);
+    const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  function handleLogout(){
+    Axios.get("/logout")
+          .then(res=>{
+              console.log(res);
+              history.replace("/",null);
+          })
+  }
+  const handleClos = () => {
+    setAnchorEl(null);
+  };
     function handleModal(movie){
         setOpen(true);
         movieTrailer(movie?.name || movie?.title || movie?.original_name)
@@ -44,7 +62,21 @@ function Row({title,fetch,large}) {
             </div>
             <>
             <Dialog fullScreen open={open} onClose={handleClose}>
-            <Nav/>
+            <div className="nav_bar" style={{backgroundColor:"#111",color:"white",position:"fixed"}}>
+            <Link style={{textDecoration:"none",color:"red",fontSize:"17px",paddingTop:"0.6%",paddingLeft:"1%"}} onClick={()=>setOpen(false)}>MOVIES TALK</Link>
+            <AccountCircleIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{paddingTop:"0.6%",paddingRight:"1%"}}/>
+            <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+            >
+                <MenuItem onClick={handleClos}><Link to="/profile" style={{textDecoration:"none",color:"black"}}>Profile</Link></MenuItem>
+                <MenuItem onClick={handleClos}><Link to="/list" style={{textDecoration:"none",color:"black"}}>My List</Link></MenuItem>
+                <MenuItem onClick={handleClos}><Link to="/" style={{textDecoration:"none",color:"black"}} onClick={handleLogout}>Log-out</Link></MenuItem>
+            </Menu>            
+        </div>
                 <Data movie={bool}/>
                 <div className="main" >
                     <Grid container spacing={2}>

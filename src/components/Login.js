@@ -19,6 +19,9 @@ function Login() {
     const [values, setValues] = React.useState({
         showPassword: false,
       });
+      const [values1, setValues1] = React.useState({
+        showPassword1: false,
+      });
     const handleClickOpen = () => {
         setOpen(true);
         setTimeout(() => {
@@ -55,6 +58,12 @@ function Login() {
         });
       console.log("hello");
     }
+    const handleClickShowPassword1 = () => {
+        setValues1({ ...values1, showPassword1: !values1.showPassword1 });
+      };
+      const handleMouseDownPassword1 = (event) => {
+        event.preventDefault();
+      };
     const handleClickShowPassword = () => {
         setValues({ ...values, showPassword: !values.showPassword });
       };
@@ -159,17 +168,17 @@ function Login() {
                             <InputLabel htmlFor="outlined-adornment-password">Password*</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password"
-                                type={values.showPassword ? 'text' : 'password'}
+                                type={values1.showPassword1 ? 'text' : 'password'}
                                 value={pass} name="password" onChange={(e)=>setpass(e.target.value)} style={{width:"400px"}}
                                 endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
                                     aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
+                                    onClick={handleClickShowPassword1}
+                                    onMouseDown={handleMouseDownPassword1}
                                     edge="end"
                                     >
-                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                    {values1.showPassword1? <Visibility /> : <VisibilityOff />}
                                     </IconButton>
                                 </InputAdornment>
                                 }
