@@ -21,7 +21,7 @@ function Lis() {
 
        }
        fun();
-    },[]);
+    },[movies]);
     const handleClose = () => {
         setOpen(false);
         settrailer("");
@@ -38,7 +38,7 @@ function Lis() {
             .catch(err=>{
                 console.log(err);
             })
-            window.location.reload(false);
+            // window.location.reload(false);
           }
           else{
           for(var i=0;i<arr.length;i++){
@@ -54,7 +54,7 @@ function Lis() {
             }).catch(err=>{
                 console.log(err);
             })
-            window.location.reload(false);
+            // window.location.reload(false);
         }
           
       }

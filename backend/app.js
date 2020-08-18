@@ -9,16 +9,20 @@ var mongoose=require('mongoose');
 var session=require('express-session');
 var passport=require('passport');
 var authenticate=require('./authenticate');
-var FileStore=require('session-file-store')(session);
+var MongoStore=require('connect-mongodb-session')(session);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
-var connect=mongoose.connect('mongodb://localhost:27017');
+var connect=mongoose.connect('mongodb://localhost:27017/hello');
 connect.then((db)=>{
   console.log("Connected Successfully");
 });
+const sessionMongo=new MongoStore({
+  uri:"mongodb://localhost:27017/hello",
+  collection:"session"
+})
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(logger('dev'));
@@ -26,11 +30,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-  name:'session_id',
-  secret:'12345-67890-09876-54321',
-  saveUninitialized:false,
+  name:"session_id",
+  secret:"12345-67890-09876-54321",
+  saveUninitialized:true,
   resave:false,
-  store:new FileStore()
+  store:sessionMongo,
+  cookie:{
+    maxAge:new Date(Date.now() + (1000*60*60*24))
+  }
 }));
 app.use(passport.initialize());
 app.use(passport.session());

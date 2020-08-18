@@ -34,15 +34,15 @@ router.post('/signup', (req, res, next) => {
   });
 });
 router.get("/movlist",(req,res,next)=>{
-  User.find({username:Logname})
+  User.find({username:req.session.passport.user})
   .then((user)=>{
     res.send(user);
   })
 })
 router.post('/dellist',(req,res,next)=>{
-  User.findOne({username:Logname})
+  User.findOne({username:req.session.passport.user})
   .then((user)=>{
-    User.update({username:Logname},{
+    User.update({username:req.session.passport.user},{
       list:req.body.arr
     }, function(err, affected, resp) {
       console.log(resp);
@@ -51,10 +51,10 @@ router.post('/dellist',(req,res,next)=>{
 });
 router.post("/list",(req,res,next)=>{
   
-  User.find({username:Logname})
+  User.find({username:req.session.passport.user})
   .then((user)=>{
     if(user){
-      User.update({username:Logname},{
+      User.update({username:req.session.passport.user},{
         $push:{"list":req.body.e}
       }, function(err, affected, resp) {
         console.log(resp);
@@ -63,17 +63,15 @@ router.post("/list",(req,res,next)=>{
   });
 });
 router.get("/profile",(req,res,next)=>{
-  User.find({username:Logname})
+  User.find({username:req.session.passport.user})
   .then((user)=>{
     res.send(user);
   })
 })
-var Logname="t";
 router.post('/login', (req, res) => {
   User.findOne({username:req.body.username})
   .then((user)=>{
       if(user){
-        Logname=req.body.username;
         passport.authenticate('local')(req, res, () => {
           res.statusCode = 200;
           res.setHeader('Content-Type', 'application/json');
@@ -136,7 +134,7 @@ router.post('/set',(req,res,next)=>{
 .catch((err)=>next(err));
 });
 router.post('/updatePassword',(req,res,next)=>{
-    User.findOne({username:Logname})
+    User.findOne({username:req.session.passport.user})
     .then((user)=>{
       user.changePassword(req.body.oldpass,req.body.newpass,function(err){
         if(err){

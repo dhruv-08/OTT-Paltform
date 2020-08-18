@@ -37,10 +37,10 @@ function Change() {
                     open={true}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description">
-                    <center><DialogTitle id="alert-dialog-title">Password Changed Successfully</DialogTitle></center>
+                    <DialogTitle id="alert-dialog-title">Password Changed Successfully</DialogTitle>
                     <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                    <center><img src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif" alt="success" style={{width:"250px",height:"200px"}}/></center>
+                    <img src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif" alt="success" style={{width:"250px",height:"200px"}}/>
                     </DialogContentText>
                     </DialogContent>
                 </Dialog>}
