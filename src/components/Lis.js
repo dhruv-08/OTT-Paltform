@@ -1,5 +1,4 @@
 import { ListItem,List,Dialog, Grid } from '@material-ui/core'
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Nav from './Nav'
 import Data from './Data'
@@ -20,10 +19,6 @@ function Lis() {
         setOpen(false);
         settrailer("");
     };
-      
-      useEffect(() => {
-          
-     },[check]);
     function handleModal(movie){
         setOpen(true);
         movieTrailer(movie?.name || movie?.title || movie?.original_name)
@@ -38,11 +33,13 @@ function Lis() {
     return (
         <div>
            <Nav/>
-           <FlipMove>
+           <div style={{paddingTop:"50px"}}>
+           {movies.length===0 && <div>Empty</div>}
+           {movies.length!==0 &&<FlipMove>
            {movies.map(movie=>(
                movie!==null &&
                <div key={movie.id}>
-                    <List key={movie.id} component="nav" style={{paddingTop:"50px"}}>
+                    <List key={movie.id} component="nav">
                     <ListItem button>
                     <Grid container>
                                     <Grid item xs style={{padding:"2%"}}>
@@ -53,8 +50,8 @@ function Lis() {
                                        <p>{movie.overview}</p>
                                     </Grid>
                                     <Grid item xs style={{paddingTop:"7%"}}>
-                                       <HighlightOffIcon style={{fontSize:"30px"}} />
-                                       {/* onClick={()=>handleDelete(movie)} */}
+                                       <HighlightOffIcon style={{fontSize:"30px"}}/>
+                                       
                                     </Grid>
                         </Grid>
                         </ListItem>
@@ -85,8 +82,8 @@ function Lis() {
             </Dialog>
                 </div>
             ))}
-            </FlipMove>
-           
+            </FlipMove>}
+            </div>
           
         </div>
     )

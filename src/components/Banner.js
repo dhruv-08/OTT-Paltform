@@ -10,59 +10,13 @@ function Banner() {
     const [success,setsuccess]=useState(false);
     const [err,seterr]=useState(false);
     const [tt,settt]=useState(false);
-    function handleList(){
-        console.log(movies);
-        var e=[
-            {
-                "id":movie.id,
-                "name":movie?.title || movie?.name || movie?.original_name,
-                "backdrop_path":movie.backdrop_path,
-                "overview":movie.overview,
-                "vote_average":movie.vote_average,
-                "release_date":movie.release_date,
-                "adult":movie.adult
-            }
-        ]
-        console.log(e);
-        var array=[];
-        for(var i=0;i<movies.length;i++){
-            array[i]=movies[i].id;
-        }
-        if(!array.includes(movie.id) && tt===false){
-            settt(true);
-            setsuccess(true);
-            setTimeout(() => {
-                setsuccess(false);
-            }, 2000);
-            Axios.post("/list",{e})
-            .then(res=>{
-                console.log("DONE!!");
-            }).catch(err=>{
-                console.log("ERROR");
-            })
-            // window.location.reload(false);
-        }
-        else{
-            seterr(true);
-            setTimeout(() => {
-                seterr(false);
-            }, 2000);
-        }
-    }
     useEffect(()=>{
         async function req(){
             const mov=await axios.get(request.Trending);
             setMovie(mov.data.results[Math.floor(Math.random()*(mov.data.results.length-1))]);
             return request;
         }
-            async function fun(){
-                const val=await Axios.get("/movlist");
-             //    console.log(val.data[0].list[0].name);
-                setmovies(val.data[0].list);
-
-            }
         req();
-        fun();
     },[]);
     return (
             <header className="banner"  style={movie.backdrop_path!==undefined?{
@@ -96,7 +50,7 @@ function Banner() {
                     <h1 className="title">{movie?.title || movie?.name || movie?.original_name}</h1>
                     <div className="banner__buttons">
                     <button className="banner__button">Play</button>
-                    <button className="banner__button" onClick={()=>handleList()}>My List</button>
+                    <button className="banner__button">My List</button>
                     </div>
                     <div className="description">
                         {movie.overview}

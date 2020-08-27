@@ -6,22 +6,7 @@ function Data({movie}) {
     const [success,setsuccess]=useState(false);
     const [tt,settt]=useState(false);
     const [err,seterr]=useState(false);
-    const [movies,setmovies]=useState([]);
-    // var e=[
-    //     {
-    //         "id":movie.id,
-    //         "name":movie?.title || movie?.name || movie?.original_name,
-    //         "backdrop_path":movie.backdrop_path,
-    //         "overview":movie.overview,
-    //         "vote_average":movie.vote_average,
-    //         "release_date":movie.release_date,
-    //         "adult":movie.adult
-    //     }
-    // ]
-    useEffect(()=>{
-
-    },[]);
-        
+    const [movies, setmovies] = useState([])
     return (
             <header className="banne"  style={{
                 backgroundSize:"cover",
@@ -55,7 +40,7 @@ function Data({movie}) {
                     <div className="banner__buttons">
                     <button className="banner__button">Play</button>
                     <button className="banner__button" >My List</button>
-                    {/* onClick={()=>handleList()} */}
+                    
                     </div>
                     <div className="description">
                         {movie.overview}

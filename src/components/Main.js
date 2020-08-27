@@ -5,7 +5,7 @@ import Banner from './Banner';
 import Nav from './Nav';
 function Main() {
     return (
-        <div>
+        <div style={{backgroundColor:"#111"}}>
             <Nav/>
              <Banner/>
             <div className="main">

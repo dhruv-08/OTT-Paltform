@@ -34,14 +34,6 @@ function Row({title,fetch,large}) {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  function handleLogout(){
-    Axios.get("/logout")
-          .then(res=>{
-              history.replace("/",null);
-          }).catch(err=>{
-            console.log(err);
-        })
-  }
   const handleClos = () => {
     setAnchorEl(null);
   };
@@ -56,7 +48,7 @@ function Row({title,fetch,large}) {
         setbool(movie);
     }
     return(
-        <div className="row">
+        <div className="row" >
             <h1 className="heading">{title}</h1>
             <div className="row_posters">
                 <FlipMove>
@@ -77,13 +69,11 @@ function Row({title,fetch,large}) {
             open={Boolean(anchorEl)}
             onClose={handleClose}
             >
-                <MenuItem onClick={handleClos}><Link to="/profile" style={{textDecoration:"none",color:"black"}}>Profile</Link></MenuItem>
                 <MenuItem onClick={handleClos}><Link to="/list" style={{textDecoration:"none",color:"black"}}>My List</Link></MenuItem>
-                <MenuItem onClick={handleClos}><Link to="/" style={{textDecoration:"none",color:"black"}} onClick={handleLogout}>Log-out</Link></MenuItem>
             </Menu>            
         </div>
                 <Data movie={bool}/>
-                <div className="main">
+                <div className="main" style={{backgroundColor:"#111"}}>
                     <Grid container>
                         <Grid item xs={6}>
                             <ReactPlayer controls={true} light={true} url={trailer} className="player"/>
