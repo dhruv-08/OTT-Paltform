@@ -22,7 +22,6 @@ function Row({title,fetch,large}) {
         settrailer("");
     };
     useEffect(() => {
-       
         async function Data(){
             const val=await axios.get(fetch);
             setmovies(val.data.results);
