@@ -10,13 +10,13 @@
     color: white;
     padding-left: 1%;
 }
-.row_posters{
+.row_posters > div{
     display: flex;
     overflow-x: scroll;
     overflow-y: hidden;
     padding: 20px;
 }
-.row_posters::-webkit-scrollbar {
+.row_posters > div::-webkit-scrollbar {
     display: none;
   }
   .di{
@@ -24,15 +24,17 @@
   }
 .row_large{
     width:100%;
-    max-height: 280px;
+    max-height: 320px;
     object-fit: contain;
+    padding-right: 1%;
     margin-right: 10px;
     transition: 0.3s ease-in;
 }
 .row_poster{
     width:100%;
-    max-height: 150px;
+    max-height: 200px;
     object-fit: contain;
+    padding-right: 1%;
     margin-right: 10px;
     transition: 0.3s ease-in;
 }

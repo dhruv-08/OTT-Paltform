@@ -44,9 +44,9 @@ function Nav() {
     setAnchorEl(null);
   };
     return (
-        <div className="nav_bar" style={show===true?{backgroundColor:"#111",color:"white",position:"fixed",transition:"0.2s ease-out"}:{backgroundColor:"transparent",color:"white",position:"fixed",transition:"0.2s ease-out"}}>
-            <Link style={{textDecoration:"none",color:"red",fontSize:"17px",paddingTop:"0.6%",paddingLeft:"1%"}} to="/home">MOVIES TALK</Link>
-            <AccountCircleIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{paddingTop:"0.6%",paddingRight:"1%"}}/>
+        <div className="nav_bar" style={show===true?{backgroundColor:"#111",color:"white",position:"fixed",height:"50px",transition:"0.2s ease-in"}:{backgroundColor:"transparent",color:"white",position:"fixed",transition:"0.2s ease-out"}}>
+            <Link style={{textDecoration:"none",color:"red",paddingTop:"0.8%",paddingLeft:"1.5%",fontWeight:"bold",fontFamily: 'Alata'}} to="/home">MOVIES TALK</Link>
+            <AccountCircleIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{paddingTop:"0.8%",paddingRight:"1.5%",fontSize:"25px"}}/>
             <Menu
             id="simple-menu"
             anchorEl={anchorEl}

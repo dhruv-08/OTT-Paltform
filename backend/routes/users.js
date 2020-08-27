@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 router.post('/signup', (req, res, next) => {
-  const user=new User({username: req.body.username,admin:req.body.admin,email:req.body.email})
+  const user=new User({username: req.body.username,email:req.body.email})
   User.register(user, 
     req.body.password, (err, user) => {
       console.log("hehe");
@@ -36,7 +36,8 @@ router.post('/signup', (req, res, next) => {
 router.get("/movlist",(req,res,next)=>{
   User.find({username:req.session.passport.user})
   .then((user)=>{
-    res.send(user);
+    var array=user[0];
+    res.send(array);
   })
 })
 router.post('/dellist',(req,res,next)=>{
@@ -50,10 +51,10 @@ router.post('/dellist',(req,res,next)=>{
   })
 });
 router.post("/list",(req,res,next)=>{
-  
   User.find({username:req.session.passport.user})
   .then((user)=>{
     if(user){
+      console.log(user.list);
       User.update({username:req.session.passport.user},{
         $push:{"list":req.body.e}
       }, function(err, affected, resp) {

@@ -7,57 +7,23 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import StarsIcon from '@material-ui/icons/Stars';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import movieTrailer from 'movie-trailer';
+import FlipMove from 'react-flip-move';
 import ReactPlayer from 'react-player'
 const baseURL="https://image.tmdb.org/t/p/original";
 function Lis() {
     const [movies, setmovies] = useState([]);
     const [bool, setbool] = useState([]);
     const [open, setOpen] =useState(false);
+    const [check, setcheck] = useState(false)
     const [trailer, settrailer] = useState("");
-    useEffect(() => {
-       async function fun(){
-           const val=await Axios.get("/movlist");
-           setmovies(val.data[0].list);
-
-       }
-       fun();
-    },[movies]);
     const handleClose = () => {
         setOpen(false);
         settrailer("");
     };
-      function handleDelete(movie){
-          var arr=[];
-          arr=movies;
-          console.log(arr);
-          if(arr.length===0){
-            Axios.post("/dellist",{arr:[]})
-            .then(res=>{
-                console.log("Done!!");
-            })
-            .catch(err=>{
-                console.log(err);
-            })
-            // window.location.reload(false);
-          }
-          else{
-          for(var i=0;i<arr.length;i++){
-              if(arr[i].id===movie.id){
-                  arr.splice(i,1);
-                  break;
-              }
-          }
-          setmovies(arr);
-          Axios.post("/dellist",{arr})
-            .then(res=>{
-                console.log("Done!!");
-            }).catch(err=>{
-                console.log(err);
-            })
-            // window.location.reload(false);
-        }
+      
+      useEffect(() => {
           
-      }
+     },[check]);
     function handleModal(movie){
         setOpen(true);
         movieTrailer(movie?.name || movie?.title || movie?.original_name)
@@ -72,7 +38,9 @@ function Lis() {
     return (
         <div>
            <Nav/>
+           <FlipMove>
            {movies.map(movie=>(
+               movie!==null &&
                <div key={movie.id}>
                     <List key={movie.id} component="nav" style={{paddingTop:"50px"}}>
                     <ListItem button>
@@ -85,7 +53,8 @@ function Lis() {
                                        <p>{movie.overview}</p>
                                     </Grid>
                                     <Grid item xs style={{paddingTop:"7%"}}>
-                                       <HighlightOffIcon style={{fontSize:"30px"}} onClick={()=>handleDelete(movie)}/>
+                                       <HighlightOffIcon style={{fontSize:"30px"}} />
+                                       {/* onClick={()=>handleDelete(movie)} */}
                                     </Grid>
                         </Grid>
                         </ListItem>
@@ -116,6 +85,7 @@ function Lis() {
             </Dialog>
                 </div>
             ))}
+            </FlipMove>
            
           
         </div>

@@ -6,13 +6,12 @@ var User = new Schema({
     admin:   {
         type: Boolean,
         default: false,
-        require:true
     },
     email:{
         type:String,
         required:true
     },
-    list:[]
+    list:[],
 });
 
 User.plugin(passportLocalMongoose);

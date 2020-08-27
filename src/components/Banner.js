@@ -11,63 +11,18 @@ function Banner() {
     const [err,seterr]=useState(false);
     const [tt,settt]=useState(false);
     useEffect(()=>{
-        async function req(){
+        async function fun(){
             const mov=await axios.get(request.Trending);
             setMovie(mov.data.results[Math.floor(Math.random()*(mov.data.results.length-1))]);
-            return request;
         }
-            async function fun(){
-                const val=await Axios.get("/movlist");
-             //    console.log(val.data[0].list[0].name);
-                setmovies(val.data[0].list);
-     
-            }
-        req();
         fun();
     },[]);
-    function handleList(){
-        var e=[
-            {
-                "id":movie.id,
-                "name":movie?.title || movie?.name || movie?.original_name,
-                "backdrop_path":movie.backdrop_path,
-                "overview":movie.overview,
-                "vote_average":movie.vote_average,
-                "release_date":movie.release_date,
-                "adult":movie.adult
-            }
-        ]
-        var array=[];
-        for(var i=0;i<movies.length;i++){
-            array[i]=movies[i].id;
-        }
-        if(!array.includes(movie.id) && tt===false){
-            settt(true);
-            setsuccess(true);
-            setTimeout(() => {
-                setsuccess(false);
-            }, 2000);
-            Axios.post("/list",{e})
-            .then(res=>{
-                console.log("DONE!!");
-            }).catch(err=>{
-                console.log("ERROR");
-            })
-            // window.location.reload(false);
-        }
-        else{
-            seterr(true);
-            setTimeout(() => {
-                seterr(false);
-            }, 2000);
-        }
-    }
     return (
-            <header className="banner"  style={{
+            <header className="banner"  style={movie.backdrop_path!==undefined?{
                 backgroundSize:"cover",
                 backgroundImage:`url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
                 backgroundPosition:"center center"
-                }}>
+                }:{ backgroundSize:"cover",backgroundPosition:"center center"}}>
             {success===true && <Dialog
                     open={true}
                     aria-labelledby="alert-dialog-title"
@@ -94,7 +49,8 @@ function Banner() {
                     <h1 className="title">{movie?.title || movie?.name || movie?.original_name}</h1>
                     <div className="banner__buttons">
                     <button className="banner__button">Play</button>
-                    <button className="banner__button" onClick={()=>handleList()}>My List</button>
+                    <button className="banner__button">My List</button>
+                    {/* onClick={()=>handleList()} */}
                     </div>
                     <div className="description">
                         {movie.overview}
