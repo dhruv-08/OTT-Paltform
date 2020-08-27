@@ -36,8 +36,7 @@ router.post('/signup', (req, res, next) => {
 router.get("/movlist",(req,res,next)=>{
   User.find({username:req.session.passport.user})
   .then((user)=>{
-    var array=user[0];
-    res.send(array);
+    res.send(user);
   })
 })
 router.post('/dellist',(req,res,next)=>{
