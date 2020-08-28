@@ -2,6 +2,7 @@ import { Button, Dialog, DialogContent, DialogContentText, DialogTitle, TextFiel
 import Axios from 'axios';
 import React, { useState } from 'react'
 import Nav from './Nav'
+import DoneIcon from '@material-ui/icons/Done';
 function Change() {
     const [old, setold] = useState("");
     const [n, setn] = useState("");
@@ -34,13 +35,14 @@ function Change() {
             <Button type="submit" variant="outlined" color="primary">Change Password</Button>
             </form></div>
             {success===true && <Dialog
+                    style={{color:"black"}}
                     open={true}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description">
-                    <DialogTitle id="alert-dialog-title">Password Changed Successfully</DialogTitle>
-                    <DialogContent>
+                    <DialogTitle id="alert-dialog-title" style={{backgroundColor:"black"}}><span style={{color:"white"}}>Password Changed Successfully</span></DialogTitle>
+                    <DialogContent style={{backgroundColor:"black",textAlign:"center"}}>
                     <DialogContentText id="alert-dialog-description">
-                    <img src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif" alt="success" style={{width:"250px",height:"200px"}}/>
+                    <DoneIcon style={{color:"white"}}/>
                     </DialogContentText>
                     </DialogContent>
                 </Dialog>}

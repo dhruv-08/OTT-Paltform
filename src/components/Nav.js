@@ -4,7 +4,7 @@ import { Link, useHistory} from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Menu, MenuItem } from '@material-ui/core';
 import Axios from 'axios';
-function Nav() {
+function Nav({check}) {
   const history = useHistory();
     const [anchorEl, setAnchorEl] = useState(null);
     const [show, setshow] = useState(false);
@@ -21,6 +21,7 @@ function Nav() {
         })
   }
   useEffect(() => {
+    if(check===false){
     window.addEventListener("scroll",()=>{
       if(window.scrollY>140){
           setshow(true);
@@ -29,7 +30,12 @@ function Nav() {
           setshow(false);
       }
   });
+}
+else{
+  setshow(true);
+}
   return()=>{
+    if(check===false){
       window.removeEventListener("scroll",()=>{
         if(window.scrollY>140){
             setshow(true);
@@ -38,6 +44,7 @@ function Nav() {
             setshow(false);
         }
         });
+      }
   }
   }, [])
   const handleClose = () => {

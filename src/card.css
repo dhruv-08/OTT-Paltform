@@ -1,0 +1,6 @@
+.poster{
+    transition: 0.3s ease-in;
+}
+.poster:hover{
+    transform: scale(1.05);
+}

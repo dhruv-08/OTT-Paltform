@@ -1,6 +1,7 @@
 import { Button, Dialog, DialogContent, DialogContentText, DialogTitle, TextField } from '@material-ui/core'
 import Axios from 'axios';
 import React, { useState } from 'react'
+import DoneIcon from '@material-ui/icons/Done';
 function Forgot() {
     const [n, setn] = useState("");
     const [success,setsuccess]=useState(false);
@@ -28,13 +29,14 @@ function Forgot() {
             <Button type="submit" variant="outlined" color="primary">Reset Password</Button>
             </form></div>
             {success===true && <Dialog
+                    style={{color:"black"}}
                     open={true}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description">
-                    <center><DialogTitle id="alert-dialog-title">Email sent Successfully</DialogTitle></center>
-                    <DialogContent>
+                    <DialogTitle id="alert-dialog-title" style={{backgroundColor:"black"}}><span style={{color:"white"}}>Email sent Successfully</span></DialogTitle>
+                    <DialogContent style={{backgroundColor:"black",textAlign:"center"}}>
                     <DialogContentText id="alert-dialog-description">
-                    <center><img src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif" alt="success" style={{width:"250px",height:"200px"}}/></center>
+                    <DoneIcon style={{color:"white"}}/>
                     </DialogContentText>
                     </DialogContent>
                 </Dialog>}

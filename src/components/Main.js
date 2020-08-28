@@ -6,7 +6,7 @@ import Nav from './Nav';
 function Main() {
     return (
         <div style={{backgroundColor:"#111"}}>
-            <Nav/>
+            <Nav check={false}/>
              <Banner/>
             <div className="main">
             <Row title="Trending" fetch={request.Trending} large={true}/>

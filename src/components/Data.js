@@ -2,6 +2,8 @@ import { Dialog,  DialogContent, DialogContentText, DialogTitle } from '@materia
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import '../data.css'
+import DoneIcon from '@material-ui/icons/Done';
+import CloseIcon from '@material-ui/icons/Close';
 function Data({movie}) {
     const [success,setsuccess]=useState(false);
     const [tt,settt]=useState(false);
@@ -63,24 +65,26 @@ function Data({movie}) {
                 backgroundPosition:"center center"
                 }}>
                     {success===true && <Dialog
+                    style={{color:"black"}}
                     open={true}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description">
-                    <DialogTitle id="alert-dialog-title">Added in list Successfully</DialogTitle>
-                    <DialogContent>
+                    <DialogTitle id="alert-dialog-title" style={{backgroundColor:"black"}}><span style={{color:"white"}}>Added in list Successfully</span></DialogTitle>
+                    <DialogContent style={{backgroundColor:"black",textAlign:"center"}}>
                     <DialogContentText id="alert-dialog-description">
-                    <img src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif" alt="Success" style={{width:"250px",height:"200px"}}/>
+                    <DoneIcon style={{color:"white"}}/>
                     </DialogContentText>
                     </DialogContent>
                 </Dialog>}
                 {err===true && <Dialog
+                    style={{color:"black"}}
                     open={true}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description">
-                    <DialogTitle id="alert-dialog-title">Already present in your list</DialogTitle>
-                    <DialogContent>
+                    <DialogTitle id="alert-dialog-title" style={{backgroundColor:"black"}}><span style={{color:"white"}}>Already present in your list</span></DialogTitle>
+                    <DialogContent style={{backgroundColor:"black",textAlign:"center"}}>
                     <DialogContentText id="alert-dialog-description">
-                    <img src="https://www.jonmgomes.com/wp-content/uploads/2020/03/Bell-Icon.gif" alt="success" style={{width:"250px",height:"250px"}}/>
+                    <CloseIcon style={{color:"white"}}/>
                     </DialogContentText>
                     </DialogContent>
                 </Dialog>}
