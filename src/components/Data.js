@@ -37,9 +37,9 @@ function Data({movie}) {
             }, 2000);
             Axios.post("/list",{e},{timeout:2000})
             .then(res=>{
-                console.log("DONE!!");
+                console.log("Tick");
             }).catch(err=>{
-                console.log("ERROR");
+                console.log("Done");
             })
             // window.location.reload(false);
         }

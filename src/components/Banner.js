@@ -13,7 +13,6 @@ function Banner() {
     const [err,seterr]=useState(false);
     const [tt,settt]=useState(false);
     function handleList(){
-        console.log(movies);
         var e=[
             {
                 "id":movie.id,
@@ -25,7 +24,6 @@ function Banner() {
                 "adult":movie.adult
             }
         ]
-        console.log(e);
         var array=[];
         for(var i=0;i<movies.length;i++){
             array[i]=movies[i].id;
@@ -38,9 +36,9 @@ function Banner() {
             }, 2000);
             Axios.post("/list",{e},{timeout:2000})
             .then(res=>{
-                console.log("DONE!!");
+                console.log("Tick!!");
             }).catch(err=>{
-                console.log("ERROR");
+                console.log("Done");
             })
             // window.location.reload(false);
         }

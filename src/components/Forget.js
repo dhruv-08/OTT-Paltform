@@ -7,12 +7,12 @@ function Forgot() {
     const [success,setsuccess]=useState(false);
     function handleSub(e){
         e.preventDefault();
-        Axios.post("/forgot",({email:n}))
+        Axios.post("/forgot",({email:n}),{timeout:2000})
         .then((res)=>{
             setn("");
         })
         .catch(err=>{
-            console.log(err);
+            console.log("Done");
         })
         setn("");
         setsuccess(true);

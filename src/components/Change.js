@@ -9,13 +9,13 @@ function Change() {
     const [success,setsuccess]=useState(false);
     function handleSub(e){
         e.preventDefault();
-        Axios.post("/updatePassword",({oldpass:old,newpass:n}))
+        Axios.post("/updatePassword",({oldpass:old,newpass:n}),{timeout:2000})
         .then((res)=>{
             setold("");
             setn("");
         })
         .catch(err=>{
-            console.log(err);
+            console.log("Done");
         })
         setold("");
         setn("");

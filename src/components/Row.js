@@ -30,7 +30,14 @@ function Row({title,fetch,large}) {
         Data();
     }, [fetch]);
     const [anchorEl, setAnchorEl] = useState(null);
-
+    function handleLogout(){
+        Axios.get("/logout")
+              .then(res=>{
+                  history.replace("/",null);
+              }).catch(err=>{
+                console.log("Done");
+            })
+      }
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -43,13 +50,13 @@ function Row({title,fetch,large}) {
         .then((url)=>{
             settrailer(url);
         }).catch(err=>{
-            console.log(err);
+            console.log("Done");
         })
         setbool(movie);
     }
     return(
         <div className="row" >
-            <h1 className="heading">{title}</h1>
+            <h1 className="heading" style={{fontWeight:"lighter"}}>{title}</h1>
             <div className="row_posters">
                 <FlipMove>
             {movies.map(movie=>(
@@ -59,7 +66,7 @@ function Row({title,fetch,large}) {
             </div>
             <>
             <Dialog fullScreen open={open} onClose={handleClose}>
-            <div className="nav_bar" style={{backgroundColor:"#111",color:"white",position:"fixed",height:"50px"}}>
+            <div className="nav_bar" style={{backgroundColor:"#111",color:"white",position:"fixed",transition:"0.2s ease-in"}}>
             <Link to="/home" style={{textDecoration:"none",color:"red",fontSize:"17px",paddingTop:"0.8%",paddingLeft:"1.5%",fontWeight:"bold",fontFamily: 'Alata'}} onClick={()=>setOpen(false)}>MOVIES TALK</Link>
             <AccountCircleIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{paddingTop:"0.8%",paddingRight:"1.5%",fontSize:"25px"}}/>
             <Menu
@@ -69,7 +76,9 @@ function Row({title,fetch,large}) {
             open={Boolean(anchorEl)}
             onClose={handleClose}
             >
+                <MenuItem onClick={handleClos}><Link to="/profile" style={{textDecoration:"none",color:"black"}}>My Account</Link></MenuItem>
                 <MenuItem onClick={handleClos}><Link to="/list" style={{textDecoration:"none",color:"black"}}>My List</Link></MenuItem>
+                <MenuItem onClick={handleLogout}><Link to="/logout" style={{textDecoration:"none",color:"black"}}>Log-Out</Link></MenuItem>
             </Menu>            
         </div>
                 <Data movie={bool}/>
@@ -87,7 +96,7 @@ function Row({title,fetch,large}) {
                                 <h1 style={{color:"white"}}><CalendarTodayIcon/><span> {bool.release_date}</span></h1>
                             </Grid>
                             <Grid item xs={4}>
-                            <h1 style={{color:"white"}}>{bool.adult===true?"A":"R"}</h1>
+                            <h1 style={{color:"white"}}>{bool.adult===true?"A":"U/A"}</h1>
                             </Grid>
                             </Grid>
                         </Grid>

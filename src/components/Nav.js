@@ -4,6 +4,7 @@ import { Link, useHistory} from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Menu, MenuItem } from '@material-ui/core';
 import Axios from 'axios';
+
 function Nav({check}) {
   const history = useHistory();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -17,13 +18,13 @@ function Nav({check}) {
           .then(res=>{
               history.replace("/",null);
           }).catch(err=>{
-            console.log(err);
+            console.log("Done");
         })
   }
   useEffect(() => {
     if(check===false){
     window.addEventListener("scroll",()=>{
-      if(window.scrollY>140){
+      if(window.scrollY>50){
           setshow(true);
       }
       else{
@@ -37,7 +38,7 @@ else{
   return()=>{
     if(check===false){
       window.removeEventListener("scroll",()=>{
-        if(window.scrollY>140){
+        if(window.scrollY>50){
             setshow(true);
         }
         else{
@@ -51,9 +52,9 @@ else{
     setAnchorEl(null);
   };
     return (
-        <div className="nav_bar" style={show===true?{backgroundColor:"#111",color:"white",position:"fixed",height:"50px",transition:"0.2s ease-in"}:{backgroundColor:"transparent",color:"white",position:"fixed",transition:"0.2s ease-out"}}>
-            <Link style={{textDecoration:"none",color:"red",paddingTop:"0.8%",paddingLeft:"1.5%",fontWeight:"bold",fontFamily: 'Alata'}} to="/home">MOVIES TALK</Link>
-            <AccountCircleIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{paddingTop:"0.8%",paddingRight:"1.5%",fontSize:"25px"}}/>
+        <div className="nav_bar" style={show===true?{backgroundColor:"#111",color:"white",position:"fixed",transition:"0.2s ease-in"}:{backgroundColor:"transparent",color:"white",position:"fixed",transition:"0.2s ease-out"}}>
+            <Link style={{textDecoration:"none",color:"red",paddingTop:"0.8%",paddingLeft:"1.5%",fontSize:"25px",fontWeight:"bold",fontFamily: 'Alata'}} to="/home">MOVIES TALK</Link>
+            <AccountCircleIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{paddingTop:"0.8%",paddingRight:"1.5%",fontSize:"35px"}}/>
             <Menu
             id="simple-menu"
             anchorEl={anchorEl}
@@ -61,7 +62,9 @@ else{
             open={Boolean(anchorEl)}
             onClose={handleClose}
             >
+                <MenuItem onClick={handleClose}><Link to="/profile" style={{textDecoration:"none",color:"black"}}>My Account</Link></MenuItem>
                 <MenuItem onClick={handleClose}><Link to="/list" style={{textDecoration:"none",color:"black"}}>My List</Link></MenuItem>
+                <MenuItem onClick={handleLogout}><Link to="/logout" style={{textDecoration:"none",color:"black"}}>Log-Out</Link></MenuItem>
             </Menu>            
         </div>
     )

@@ -1,14 +1,16 @@
 .banner{
-    height: 500px;
+    height: 720px;
     color: white;
     object-fit: contain;
-    box-shadow: inset 0px 0px 0px #111, inset -0px -100px 100px #111;
+    box-shadow: inset 0px 0px 0px #111, inset -0px -150px 100px #111;
+    /* box-shadow: inset 0px -300px 550px #111; */
 }
 .banner_content{
     line-height: 1.5;
     margin-right: 2%;
-    padding-top:5%;
+    padding-top:12%;
     padding-left: 2%;
+    font-weight: lighter;
 }
 .banner__button{
     cursor: pointer;
@@ -38,5 +40,4 @@
 .description{
     max-width: 500px;
     line-height: 1.5;
-    font-weight: 700;
 }

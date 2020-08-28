@@ -20,6 +20,7 @@
     "react-dom": "^16.13.1",
     "react-flip-move": "^3.0.4",
     "react-helmet": "^6.1.0",
+    "react-hover-observer": "^2.1.1",
     "react-player": "^2.6.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",

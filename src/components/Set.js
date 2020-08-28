@@ -7,11 +7,11 @@ function Set() {
     const [success,setsuccess]=useState(false);
     function handleSub(e){
         e.preventDefault();
-        Axios.post("/set",({newpass:n}))
+        Axios.post("/set",({newpass:n}),{timeout:2000})
         .then((res)=>{
             setn("");
         }).catch(err=>{
-            console.log(err);
+            console.log("Done");
         })
         setn("");
         setsuccess(true);

@@ -45,7 +45,7 @@ function Login() {
     };
     function handleSignup(e){
         e.preventDefault();
-        Axios.post("/signup",{username:user,password:pass,email:em})
+        Axios.post("/signup",{username:user,password:pass,email:em},{timeout:2000})
         .then(res=>{
             setuser("");
             setpass("");
@@ -57,7 +57,6 @@ function Login() {
             setem("");
             handlesign();
         });
-      console.log("hello");
     }
     const handleClickShowPassword1 = () => {
         setValues1({ ...values1, showPassword1: !values1.showPassword1 });

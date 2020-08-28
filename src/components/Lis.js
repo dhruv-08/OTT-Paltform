@@ -20,6 +20,7 @@ function Lis() {
     const [check, setcheck] = useState(false)
     const [trailer, settrailer] = useState("");
     const [success, setsuccess] = useState(false)
+    const [length, setlength] = useState(0);
     const handleClose = () => {
         setOpen(false);
         settrailer("");
@@ -31,11 +32,11 @@ function Lis() {
             }, 2000);
         Axios.post("/dellist",{movie},{timeout:2000})
           .then(res=>{
-              console.log("Done!!");
+              console.log("Tick");
             //   setcheck(!check);
           }).catch(err=>{
             setcheck(!check);
-              console.log(err);
+            console.log("Done");
           })
         
         //   window.location.reload(false);      
@@ -44,7 +45,8 @@ function Lis() {
         async function fun(){
             const val=await Axios.get("/movlist",{timeout:2000});
             setmovies(val.data[0].list);
- 
+            setlength(val.data[0].list.length);
+            console.log(length)
         }
         fun();
      },[check]);
@@ -55,7 +57,7 @@ function Lis() {
             settrailer(url);
         })
         .catch((err)=>{
-            console.log(err);
+            console.log("Done");
         })
         setbool(movie);
     }
@@ -127,12 +129,14 @@ function Lis() {
             <Helmet>
                 <style>{'body { background-color: #1a1a1a; }'}</style>
             </Helmet>
-            <Nav check={true}/>
-            <div style={{paddingTop:"50px"}}>
+             <Nav check={true}/>
+             {length===1 && <span style={{color:"white",fontWeight:"lighter"}}>EMPTY</span>}
+             {length===0 && <span style={{color:"white",fontWeight:"lighter"}}>EMPTY</span>}
+             {length!==0 && <div style={{paddingTop:"50px"}}>
                 <div style={{textAlign:"center",padding:"4.5%"}}><h1 style={{color:"white",fontWeight:"lighter",fontSize:"40px"}}>My List</h1></div>
             <FlipMove>
                     {movies.map(movie=>
-                    <Grid container>
+                    <Grid key={movie.id} container>
                         <Grid item xs={12} style={{paddingBottom:"2%"}}>
                         <div className="poster" style={{width:"1000px",height:"450px",borderRadius:"15px",margin:"auto",boxShadow: "inset 600px 100px 550px #111",backgroundRepeat:"no-repeat",backgroundSize:"cover",backgroundImage:`url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`}}>
                         <div style={{paddingLeft:"2%",paddingTop:"1%"}}>
@@ -186,7 +190,7 @@ function Lis() {
                      </Grid>
                      </div>
              </Dialog>
-            </div>
+            </div>}
         </div>
     )
 }
