@@ -25,6 +25,7 @@ function Row({title,fetch,large}) {
     useEffect(() => {
         async function Data(){
             const val=await axios.get(fetch);
+            console.log(val.data.results);
             setmovies(val.data.results);
         }
         Data();

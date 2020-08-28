@@ -1,4 +1,4 @@
-import { ListItem,List,Dialog, Grid } from '@material-ui/core'
+import { ListItem,List,Dialog, Grid, DialogTitle, DialogContent, DialogContentText } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import Nav from './Nav'
 import Data from './Data'
@@ -8,6 +8,7 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import movieTrailer from 'movie-trailer';
 import FlipMove from 'react-flip-move';
 import ReactPlayer from 'react-player'
+import Axios from 'axios';
 const baseURL="https://image.tmdb.org/t/p/original";
 function Lis() {
     const [movies, setmovies] = useState([]);
@@ -15,10 +16,45 @@ function Lis() {
     const [open, setOpen] =useState(false);
     const [check, setcheck] = useState(false)
     const [trailer, settrailer] = useState("");
+    const [success, setsuccess] = useState(false)
     const handleClose = () => {
         setOpen(false);
         settrailer("");
     };
+    function handleDelete(movie){
+        setsuccess(true);
+            setTimeout(() => {
+                setsuccess(false);
+            }, 2000);
+        var arr=[];
+        arr=movies;
+        for(var i=0;i<arr.length;i++){
+            if(arr[i].id===movie.id){
+                arr.splice(i,1);
+                break;
+            }
+        }
+        setmovies(arr);
+        async function run(){
+        await Axios.post("/dellist",{arr},{timeout:2000})
+          .then(res=>{
+              console.log("Done!!");
+          }).catch(err=>{
+              console.log(err);
+          })
+        }
+        run();
+        setcheck(!check);
+        //   window.location.reload(false);      
+    }
+    useEffect(() => {
+        async function fun(){
+            const val=await Axios.get("/movlist",{timeout:2000});
+            setmovies(val.data[0].list);
+ 
+        }
+        fun();
+     },[check]);
     function handleModal(movie){
         setOpen(true);
         movieTrailer(movie?.name || movie?.title || movie?.original_name)
@@ -33,13 +69,11 @@ function Lis() {
     return (
         <div>
            <Nav/>
-           <div style={{paddingTop:"50px"}}>
-           {movies.length===0 && <div>Empty</div>}
-           {movies.length!==0 &&<FlipMove>
+           <FlipMove>
            {movies.map(movie=>(
                movie!==null &&
                <div key={movie.id}>
-                    <List key={movie.id} component="nav">
+                    <List key={movie.id} component="nav" style={{paddingTop:"50px"}}>
                     <ListItem button>
                     <Grid container>
                                     <Grid item xs style={{padding:"2%"}}>
@@ -50,7 +84,7 @@ function Lis() {
                                        <p>{movie.overview}</p>
                                     </Grid>
                                     <Grid item xs style={{paddingTop:"7%"}}>
-                                       <HighlightOffIcon style={{fontSize:"30px"}}/>
+                                       <HighlightOffIcon style={{fontSize:"30px"}} onClick={()=>handleDelete(movie)}/>
                                        
                                     </Grid>
                         </Grid>
@@ -82,9 +116,19 @@ function Lis() {
             </Dialog>
                 </div>
             ))}
-            </FlipMove>}
-            </div>
-          
+            </FlipMove>
+            {success===true && <Dialog
+                    open={true}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description">
+                    <DialogTitle id="alert-dialog-title">Deleted from list Successfully</DialogTitle>
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                    <img src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif" alt="success" style={{width:"250px",height:"200px"}}/>
+                    </DialogContentText>
+                    </DialogContent>
+                </Dialog>}
+
         </div>
     )
 }
