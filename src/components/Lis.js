@@ -26,25 +26,15 @@ function Lis() {
             setTimeout(() => {
                 setsuccess(false);
             }, 2000);
-        var arr=[];
-        arr=movies;
-        for(var i=0;i<arr.length;i++){
-            if(arr[i].id===movie.id){
-                arr.splice(i,1);
-                break;
-            }
-        }
-        setmovies(arr);
-        async function run(){
-        await Axios.post("/dellist",{arr},{timeout:2000})
+        Axios.post("/dellist",{movie},{timeout:2000})
           .then(res=>{
               console.log("Done!!");
+            //   setcheck(!check);
           }).catch(err=>{
+            setcheck(!check);
               console.log(err);
           })
-        }
-        run();
-        setcheck(!check);
+        
         //   window.location.reload(false);      
     }
     useEffect(() => {

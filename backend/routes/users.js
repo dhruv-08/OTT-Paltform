@@ -43,7 +43,7 @@ router.post('/dellist',(req,res,next)=>{
   User.findOne({username:req.session.passport.user})
   .then((user)=>{
     User.update({username:req.session.passport.user},{
-      list:req.body.arr
+       $pull: { "list" : { id: req.body.movie.id } },
     }, function(err, affected, resp) {
       console.log(resp);
    });
