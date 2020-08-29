@@ -8,6 +8,7 @@ import Forget from './components/Forget';
 import Card from './components/Card';
 import Set from './components/Set';
 import {Switch,Route} from 'react-router-dom'
+import Search from "./components/Search";
 function App() {
 
   return( 
@@ -23,6 +24,7 @@ function App() {
                 <Route exact path="/change" component={()=><Change/>}/>
                 <Route exact path="/forget" component={()=><Forget/>}/>
                 <Route exact path="/set" component={()=><Set/>}/>
+                <Route exact path="/search" component={()=><Search/>}/>
             </Switch>
       </div>
   );

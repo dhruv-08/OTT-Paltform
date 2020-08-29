@@ -46,7 +46,6 @@ function Lis() {
             const val=await Axios.get("/movlist",{timeout:2000});
             setmovies(val.data[0].list);
             setlength(val.data[0].list.length);
-            console.log(length)
         }
         fun();
      },[check]);
@@ -130,8 +129,6 @@ function Lis() {
                 <style>{'body { background-color: #1a1a1a; }'}</style>
             </Helmet>
              <Nav check={true}/>
-             {length===1 && <span style={{color:"white",fontWeight:"lighter"}}>EMPTY</span>}
-             {length===0 && <span style={{color:"white",fontWeight:"lighter"}}>EMPTY</span>}
              {length!==0 && <div style={{paddingTop:"50px"}}>
                 <div style={{textAlign:"center",padding:"4.5%"}}><h1 style={{color:"white",fontWeight:"lighter",fontSize:"40px"}}>My List</h1></div>
             <FlipMove>

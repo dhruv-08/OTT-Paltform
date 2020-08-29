@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Row from "./Row"
 import request from "../request";
 import Banner from './Banner';
+import axios from '../Axios/axios'
 import Nav from './Nav';
 function Main() {
+    useEffect(() => {
+        async function Data(){
+            const val=await axios.get(request.search);
+            console.log(val);
+        }
+        Data();
+    }, []);
     return (
         <div style={{backgroundColor:"#111"}}>
             <Nav check={false}/>

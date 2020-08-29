@@ -19,5 +19,6 @@ const request = {
   History: `/discover/movie?api_key=${API_KEY}&with_genres=36`,
   War: `/discover/movie?api_key=${API_KEY}&with_genres=10752`,
   Adventure: `/discover/movie?api_key=${API_KEY}&with_genres=12`,
+  search: `/search/movie?api_key=${API_KEY}&query=avengers`,
 };
 export default request;

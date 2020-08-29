@@ -64,8 +64,9 @@ else{
             >
                 <MenuItem onClick={handleClose}><Link to="/profile" style={{textDecoration:"none",color:"black"}}>My Account</Link></MenuItem>
                 <MenuItem onClick={handleClose}><Link to="/list" style={{textDecoration:"none",color:"black"}}>My List</Link></MenuItem>
+                <MenuItem onClick={handleClose}><Link to="/search" style={{textDecoration:"none",color:"black"}}>Search</Link></MenuItem>
                 <MenuItem onClick={handleLogout}><Link to="/logout" style={{textDecoration:"none",color:"black"}}>Log-Out</Link></MenuItem>
-            </Menu>            
+            </Menu>
         </div>
     )
 }

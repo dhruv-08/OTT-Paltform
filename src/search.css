@@ -1,0 +1,23 @@
+.pos>div{
+    display: contents;
+}
+.posimg{
+    width:100%;
+    max-height: 160px;
+    object-fit: contain;
+    /* padding-right: 1%; */
+    margin-right: 1px;
+    transition: 0.3s ease-in;
+}
+.posimg:hover{
+    transform: scale(1.08);
+}
+.dis{
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   line-height: 25px;     /* fallback */
+   max-height: 51px;      /* fallback */
+   -webkit-line-clamp: 3; /* number of lines to show */
+   -webkit-box-orient: vertical;
+}
