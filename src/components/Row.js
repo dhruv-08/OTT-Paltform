@@ -51,10 +51,10 @@ function Row({title,fetch,large}) {
             console.log("Done");
         });
         setbool(movie);
-        const page=Math.floor(Math.random()*(5-1))+1;
+        // const page=Math.floor(Math.random()*(5-1))+1;
         getData();
         async function getData(){
-            const find=await axios.get(`/movie/${movie.id}/similar?api_key=${API_KEY}&language=en-US&page=${page}`)
+            const find=await axios.get(`/movie/${movie.id}/similar?api_key=${API_KEY}&language=en-US&page=1`)
             setsim(find.data.results.slice(0,9));
         }
         
@@ -80,19 +80,20 @@ function Row({title,fetch,large}) {
                 backgroundImage:`url("https://image.tmdb.org/t/p/original/${bool?.backdrop_path}")`,
                 backgroundPosition:"center center",
                 }}><div style={{textAlign:"end",paddingRight:"4%",paddingTop:"2%"}} onClick={handleClose}><CloseIcon style={{position:"fixed"}}/></div>
-                <div style={{position:"absolute", paddingTop:"60%",paddingLeft:"2%"}}><span style={{color:"white",paddingTop:"100%",fontWeight:"lighter",fontSize:"30px"}}>{bool?.title || bool?.name || bool?.original_name}</span></div>
+                <div style={{position:"absolute", paddingTop:"45%",paddingLeft:"2%"}}><span style={{color:"white",paddingTop:"100%",fontWeight:"lighter",fontSize:"30px"}}>{bool?.title || bool?.name || bool?.original_name}</span></div>
                 </header>
                 
                 <div style={{paddingLeft:"2%",paddingTop:"1%"}}>
-                    <div style={{color:"white",paddingBottom:"2%",paddingTop:"2%"}}><GradeIcon style={{fontSize:"15px"}}/> {bool.vote_average!=undefined?<span style={{fontSize:"20px",paddingRight:"2%"}}>{bool.vote_average}</span>:<span style={{fontSize:"20px",paddingRight:"2%"}}>N/A</span>}{bool.release_date!==undefined?<span><CalendarTodayIcon style={{fontSize:"15px"}}/> {bool.release_date}</span>:<span><CalendarTodayIcon style={{fontSize:"15px"}}/> N/A</span>}</div>
+                    <div style={{color:"white",paddingBottom:"2%",paddingTop:"2%"}}><GradeIcon style={{fontSize:"15px"}}/> {bool.vote_average!=undefined?<span style={{fontSize:"20px",paddingRight:"2%"}}>{bool.vote_average}</span>:<span style={{fontSize:"20px",paddingRight:"2%"}}>N/A</span>}{bool.release_date!==undefined?<span><CalendarTodayIcon style={{fontSize:"15px"}}/> {bool.release_date}</span>:<span><CalendarTodayIcon style={{fontSize:"15px"}}/> N/A</span>}<span style={{color:"white",fontSize:"15px",paddingLeft:"2%"}}>{bool.adult===true?"A":"U/A"}</span></div>
                             <div style={{color:"white",fontSize:"20px",width:"1030px",fontWeight:"lighter"}}>
                                 {bool.overview}
                             </div>
                         </div>
-                        <div style={{paddingLeft:"2%",paddingTop:"2%"}}><AddIcon style={{color:"white",fontSize:"60px"}}/><br/><span style={{color:"white",fontSize:"20px"}}>My List</span></div>
-                        <Grid container>
+                        <div style={{paddingLeft:"2%",paddingTop:"2%",paddingBottom:"2%"}}><AddIcon style={{color:"white",fontSize:"60px"}}/><br/><span style={{color:"white",fontSize:"20px"}}>My List</span></div>
+                        <Grid container style={{paddingBottom:"2%", width:"1200px"}}>
                         {sim.map((movie,idx)=>(
-                                movie.backdrop_path?<Grid item={6} key={movie?.id}><img  src={`${baseURL}${movie?.backdrop_path}`} alt={movie?.title} className={"row_poster"} onClick={()=>handleModal(movie)}/>:<div key={movie.id}>{console.log(movie?.name||movie?.title)}</div></Grid>:<div key={idx}/>
+                        movie.backdrop_path?<Grid item xs={4} key={movie?.id}>
+                                <img src={`${baseURL}${movie?.backdrop_path}`} alt={movie?.title} className={"row_pos"} onClick={()=>handleModal(movie)}/></Grid>:<div key={movie.id}/>
                             ))}
                             
                         </Grid>

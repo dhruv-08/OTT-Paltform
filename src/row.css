@@ -10,7 +10,7 @@
     color: white;
     padding-left: 1%;
 }
-.row{
+.row>div{
     padding: 8px;
     padding-left: 20px;
 }
@@ -19,7 +19,7 @@
     overflow-x: scroll;
     overflow-y: hidden;
     padding: 8px;
-    padding-left: 15px;
+    padding-left: 0px;
 }
 .row_posters > div::-webkit-scrollbar {
     display: none;
@@ -43,6 +43,17 @@
     margin-right: 10px;
     transition: 0.3s ease-in;
 }
+.row_pos{
+        width:100%;
+        max-height: 230px;
+        object-fit: contain;
+        /* padding-right: 1%; */
+        margin-right: 2px;
+        transition: 0.3s ease-in;
+}
 .row_poster:hover,.row_large:hover{
+    transform: scale(1.08);
+}
+.row_pos:hover{
     transform: scale(1.08);
 }
