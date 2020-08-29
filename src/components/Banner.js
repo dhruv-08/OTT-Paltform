@@ -33,8 +33,8 @@ function Banner() {
             setsuccess(true);
             setTimeout(() => {
                 setsuccess(false);
-            }, 2000);
-            Axios.post("/list",{e},{timeout:2000})
+            }, 3000);
+            Axios.post("/list",{e},{timeout:3000})
             .then(res=>{
                 console.log("Tick!!");
             }).catch(err=>{
@@ -46,7 +46,7 @@ function Banner() {
             seterr(true);
             setTimeout(() => {
                 seterr(false);
-            }, 2000);
+            }, 3000);
         }
     }
     useEffect(()=>{
@@ -56,7 +56,7 @@ function Banner() {
             return request;
         }
         async function fun(){
-            const val=await Axios.get("/movlist",{timeout:2000});
+            const val=await Axios.get("/movlist",{timeout:4000});
          //    console.log(val.data[0].list[0].name);
             setmovies(val.data[0].list);
 

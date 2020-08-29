@@ -18,6 +18,7 @@ import AddIcon from '@material-ui/icons/Add';
 import ReactPlayer from 'react-player'
 import Nav from './Nav';
 import Slide from '@material-ui/core/Slide';
+import YouTubeIcon from '@material-ui/icons/YouTube';
 const API_KEY = "7e0f5e57c7fdc5e30af84956f6d5a5c8";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -29,9 +30,18 @@ function Row({title,fetch,large}) {
     const [bool, setbool] = useState([]);
     const [trailer, settrailer] = useState("");
     const [open, setOpen] =useState(false);
+    const [openn, setOpenn] =useState(false);
     const [sim, setsim] = useState([])
+    const [success,setsuccess]=useState(false);
+    const [tt,settt]=useState(false);
+    const [err,seterr]=useState(false);
+    const [mov, setmov] = useState([])
     const handleClose = () => {
         setOpen(false);
+        settrailer("");
+    };
+    const handleClos = () => {
+        setOpenn(false);
         settrailer("");
     };
     useEffect(() => {
@@ -39,6 +49,11 @@ function Row({title,fetch,large}) {
             const val=await axios.get(fetch);
             setmovies(val.data.results);
         }
+        async function fun(){
+            const val=await Axios.get("/movlist",{timeout:5000});
+            setmov(val.data[0].list);
+        }
+    fun();
         Data();
     }, [fetch]);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -56,10 +71,48 @@ function Row({title,fetch,large}) {
         async function getData(){
             const find=await axios.get(`/movie/${movie.id}/similar?api_key=${API_KEY}&language=en-US&page=1`)
             setsim(find.data.results.slice(0,9));
+        }        
+    }
+    function handleTrail(){
+        setOpen(false);
+        setOpenn(true);
+    }
+    function handleList(movie){
+        var e=[
+            {
+                "id":movie.id,
+                "name":movie?.title || movie?.name || movie?.original_name,
+                "backdrop_path":movie.backdrop_path,
+                "overview":movie.overview,
+                "vote_average":movie.vote_average,
+                "release_date":movie.release_date,
+                "adult":movie.adult
+            }
+        ]
+        var array=[];
+        for(var i=0;i<mov.length;i++){
+            array[i]=mov[i].id;
         }
-        
-        
-        
+        if(!array.includes(movie.id)){
+            settt(true);
+            setsuccess(true);
+            setTimeout(() => {
+                setsuccess(false);
+            }, 3000);
+            Axios.post("/list",{e},{timeout:3000})
+            .then(res=>{
+                console.log("Tick");
+            }).catch(err=>{
+                console.log("Done");
+            })
+            // window.location.reload(false);
+        }
+        else{
+            seterr(true);
+            setTimeout(() => {
+                seterr(false);
+            }, 3000);
+        }
     }
     return(
         <div className="row" >
@@ -84,19 +137,21 @@ function Row({title,fetch,large}) {
                 </header>
                 
                 <div style={{paddingLeft:"2%",paddingTop:"1%"}}>
-                    <div style={{color:"white",paddingBottom:"2%",paddingTop:"2%"}}><GradeIcon style={{fontSize:"15px"}}/> {bool.vote_average!=undefined?<span style={{fontSize:"20px",paddingRight:"2%"}}>{bool.vote_average}</span>:<span style={{fontSize:"20px",paddingRight:"2%"}}>N/A</span>}{bool.release_date!==undefined?<span><CalendarTodayIcon style={{fontSize:"15px"}}/> {bool.release_date}</span>:<span><CalendarTodayIcon style={{fontSize:"15px"}}/> N/A</span>}<span style={{color:"white",fontSize:"15px",paddingLeft:"2%"}}>{bool.adult===true?"A":"U/A"}</span></div>
+                    <div style={{color:"white",paddingBottom:"2%",paddingTop:"2%"}}><GradeIcon style={{fontSize:"15px"}}/> {bool.vote_average!=undefined?<span style={{fontSize:"20px",paddingRight:"2%"}}>{bool.vote_average}</span>:<span style={{fontSize:"25px",paddingRight:"2%"}}>N/A</span>}{bool.release_date!==undefined?<span><CalendarTodayIcon style={{fontSize:"15px"}}/> {bool.release_date}</span>:<span><CalendarTodayIcon style={{fontSize:"15px"}}/> N/A</span>}<span style={{color:"white",fontSize:"25px",paddingLeft:"2%"}}>{bool.adult===true?"A":"U/A"}</span><span style={{paddingLeft:"2%"}} onClick={()=>handleTrail()}><YouTubeIcon style={{color:"white",fontSize:"20px"}}/><span style={{fontSize:"25px"}}> Trailer</span></span></div>
                             <div style={{color:"white",fontSize:"20px",width:"1030px",fontWeight:"lighter"}}>
                                 {bool.overview}
                             </div>
                         </div>
-                        <div style={{paddingLeft:"2%",paddingTop:"2%",paddingBottom:"2%"}}><AddIcon style={{color:"white",fontSize:"60px"}}/><br/><span style={{color:"white",fontSize:"20px"}}>My List</span></div>
-                        <Grid container style={{paddingBottom:"2%", width:"1200px"}}>
+                        <div style={{paddingLeft:"2%",paddingTop:"2%",paddingBottom:"2%"}} onClick={()=>handleList(bool)}><AddIcon style={{color:"white",fontSize:"60px"}}/><br/><span style={{color:"white",fontSize:"20px"}}>My List</span></div>
+                        <Grid container style={{width:"1200px"}} className="rowrow">
+                            <FlipMove>
                         {sim.map((movie,idx)=>(
                         movie.backdrop_path?<Grid item xs={4} key={movie?.id}>
                                 <img src={`${baseURL}${movie?.backdrop_path}`} alt={movie?.title} className={"row_pos"} onClick={()=>handleModal(movie)}/></Grid>:<div key={movie.id}/>
                             ))}
-                            
+                            </FlipMove>
                         </Grid>
+                        
                     {/* <Grid container>
                         <Grid item xs={6}>
                             <ReactPlayer controls={true} light={true} url={trailer} className="player"/>
@@ -118,6 +173,35 @@ function Row({title,fetch,large}) {
 
                     </div>
             </Dialog>
+            <Dialog open={openn} maxWidth='xl' onClose={handleClos} TransitionComponent={Transition}>
+                <div className="main" style={{backgroundColor:"#111",width:"670px"}}>
+                <ReactPlayer controls={true} light={true} url={trailer} className="player"/>
+                </div>
+            </Dialog>
+            {success===true && <Dialog
+                    style={{color:"black"}}
+                    open={true}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description">
+                    <DialogTitle id="alert-dialog-title" style={{backgroundColor:"black"}}><span style={{color:"white"}}>Added in list Successfully</span></DialogTitle>
+                    <DialogContent style={{backgroundColor:"black",textAlign:"center"}}>
+                    <DialogContentText id="alert-dialog-description">
+                    <DoneIcon style={{color:"white"}}/>
+                    </DialogContentText>
+                    </DialogContent>
+                </Dialog>}
+                {err===true && <Dialog
+                    style={{color:"black"}}
+                    open={true}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description">
+                    <DialogTitle id="alert-dialog-title" style={{backgroundColor:"black"}}><span style={{color:"white"}}>Already present in your list</span></DialogTitle>
+                    <DialogContent style={{backgroundColor:"black",textAlign:"center"}}>
+                    <DialogContentText id="alert-dialog-description">
+                    <CloseIcon style={{color:"white"}}/>
+                    </DialogContentText>
+                    </DialogContent>
+                </Dialog>}
         </div>
     );
 }
