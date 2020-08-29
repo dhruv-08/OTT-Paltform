@@ -18,6 +18,7 @@
     "react-animated-css": "^1.2.1",
     "react-animations": "^1.0.0",
     "react-card-flip": "^1.0.11",
+    "react-custom-scroll": "^4.2.1",
     "react-dom": "^16.13.1",
     "react-flip-move": "^3.0.4",
     "react-helmet": "^6.1.0",

@@ -2,13 +2,143 @@ import React, { useEffect, useState } from 'react'
 import '../nav.css'
 import { Link, useHistory} from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { Menu, MenuItem } from '@material-ui/core';
+import { Grid, Menu, MenuItem } from '@material-ui/core';
 import Axios from 'axios';
+import TocIcon from '@material-ui/icons/Toc';
+import ListIcon from '@material-ui/icons/List';
 
+
+
+
+
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+import CustomScroll from 'react-custom-scroll';
+
+
+
+
+
+
+
+const useStyles = makeStyles({
+  list: {
+    width: 250,
+    height:2220,
+    color:"white",
+    backgroundColor:"#111"
+  },
+  fullList: {
+    width: 'auto',
+  },
+});
 function Nav({check}) {
   const history = useHistory();
     const [anchorEl, setAnchorEl] = useState(null);
     const [show, setshow] = useState(false);
+
+
+    const classes = useStyles();
+    const [state, setState] = React.useState({
+      top: false,
+      left: false,
+      bottom: false,
+      right: false,
+    });
+  
+    const toggleDrawer = (anchor, open) => (event) => {
+      if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        return;
+      }
+  
+      setState({ ...state, [anchor]: open });
+    };
+  
+    const list = (anchor) => (
+      <div
+        className={clsx(classes.list, {
+          [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+        })}
+        role="presentation"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
+      >
+        <CustomScroll>
+        <List>
+            <ListItem button>
+                  <ListItemText primary={"Home"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Action"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Sci-Fi"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Comedy"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Mystery"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Crime"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Tv Shows"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Thriller"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Documentaries"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Horror"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Romance"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Animated"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Drama"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Family"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Fantasy"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"History"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Western"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Music"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"War"} />
+              </ListItem>
+              <ListItem button>
+                  <ListItemText primary={"Adventure"} />
+              </ListItem>           
+        </List></CustomScroll>
+      </div>
+    );
+
+
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -31,10 +161,10 @@ function Nav({check}) {
           setshow(false);
       }
   });
-}
-else{
-  setshow(true);
-}
+  }
+  else{
+    setshow(true);
+  }
   return()=>{
     if(check===false){
       window.removeEventListener("scroll",()=>{
@@ -53,7 +183,27 @@ else{
   };
     return (
         <div className="nav_bar" style={show===true?{backgroundColor:"#111",color:"white",position:"fixed",transition:"0.2s ease-in"}:{backgroundColor:"transparent",color:"white",position:"fixed",transition:"0.2s ease-out"}}>
-            <Link style={{textDecoration:"none",color:"red",paddingTop:"0.8%",paddingLeft:"1.5%",fontSize:"25px",fontWeight:"bold",fontFamily: 'Alata'}} to="/home">MOVIES TALK</Link>
+        <div style={{}}>
+        <Grid container>
+          <Grid item xs={3}>
+          {['left'].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button onClick={toggleDrawer(anchor, true)} ><ListIcon style={{color:"white",fontSize:"35px"}}/></Button>
+          <SwipeableDrawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+            onOpen={toggleDrawer(anchor, true)}
+          >
+            {list(anchor)}
+          </SwipeableDrawer>
+        </React.Fragment>
+      ))}
+          </Grid>
+          <Grid item xs={8}>
+          <div style={{paddingTop:"3%"}}><Link style={{textDecoration:"none",color:"red",fontSize:"25px",fontWeight:"bold",fontFamily: 'Alata'}} to="/home">MOVIES TALK</Link>
+          </div></Grid>
+            </Grid></div>
             <AccountCircleIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{paddingTop:"0.8%",paddingRight:"1.5%",fontSize:"35px"}}/>
             <Menu
             id="simple-menu"

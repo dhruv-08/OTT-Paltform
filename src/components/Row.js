@@ -11,6 +11,7 @@ import StarsIcon from '@material-ui/icons/Stars';
 import FlipMove from 'react-flip-move';
 import movieTrailer from 'movie-trailer';
 import ReactPlayer from 'react-player'
+import Nav from './Nav';
 const baseURL="https://image.tmdb.org/t/p/original";
 function Row({title,fetch,large}) {
     const history = useHistory();
@@ -30,20 +31,6 @@ function Row({title,fetch,large}) {
         Data();
     }, [fetch]);
     const [anchorEl, setAnchorEl] = useState(null);
-    function handleLogout(){
-        Axios.get("/logout")
-              .then(res=>{
-                  history.replace("/",null);
-              }).catch(err=>{
-                console.log("Done");
-            })
-      }
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClos = () => {
-    setAnchorEl(null);
-  };
     function handleModal(movie){
         setOpen(true);
         movieTrailer(movie?.name || movie?.title || movie?.original_name)
@@ -56,7 +43,7 @@ function Row({title,fetch,large}) {
     }
     return(
         <div className="row" >
-            <h1 className="heading" style={{fontWeight:"lighter"}}>{title}</h1>
+            <h1 className="heading" style={{fontWeight:"lighter",fontSize:"20px",paddingLeft:"1.2%"}}>{title}</h1>
             <div className="row_posters">
                 <FlipMove>
             {movies.map(movie=>(
@@ -66,21 +53,7 @@ function Row({title,fetch,large}) {
             </div>
             <>
             <Dialog fullScreen open={open} onClose={handleClose}>
-            <div className="nav_bar" style={{backgroundColor:"#111",color:"white",position:"fixed",transition:"0.2s ease-in"}}>
-            <Link to="/home" style={{textDecoration:"none",color:"red",fontSize:"17px",paddingTop:"0.8%",paddingLeft:"1.5%",fontWeight:"bold",fontFamily: 'Alata'}} onClick={()=>setOpen(false)}>MOVIES TALK</Link>
-            <AccountCircleIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{paddingTop:"0.8%",paddingRight:"1.5%",fontSize:"25px"}}/>
-            <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-            >
-                <MenuItem onClick={handleClos}><Link to="/profile" style={{textDecoration:"none",color:"black"}}>My Account</Link></MenuItem>
-                <MenuItem onClick={handleClos}><Link to="/list" style={{textDecoration:"none",color:"black"}}>My List</Link></MenuItem>
-                <MenuItem onClick={handleLogout}><Link to="/logout" style={{textDecoration:"none",color:"black"}}>Log-Out</Link></MenuItem>
-            </Menu>            
-        </div>
+            <Nav check={true}/>
                 <Data movie={bool}/>
                 <div className="main" style={{backgroundColor:"#111"}}>
                     <Grid container>

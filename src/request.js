@@ -1,5 +1,6 @@
 const API_KEY = "7e0f5e57c7fdc5e30af84956f6d5a5c8";
 const request = {
+  Upcoming: `/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`,
   Trending: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
   NetflixOrg: `/discover/tv?api_key=${API_KEY}&with_network=213`,
   TopRated: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
@@ -18,7 +19,10 @@ const request = {
   Fantasy: `/discover/movie?api_key=${API_KEY}&with_genres=14`,
   History: `/discover/movie?api_key=${API_KEY}&with_genres=36`,
   War: `/discover/movie?api_key=${API_KEY}&with_genres=10752`,
+  Music: `/discover/movie?api_key=${API_KEY}&with_genres=10402`,
   Adventure: `/discover/movie?api_key=${API_KEY}&with_genres=12`,
-  search: `/search/movie?api_key=${API_KEY}`,
+  Western: `/discover/movie?api_key=${API_KEY}&with_genres=37`,
+  TvShows: `/discover/movie?api_key=${API_KEY}&with_genres=10770`,
+  search: `/search/multi?api_key=${API_KEY}`,
 };
 export default request;

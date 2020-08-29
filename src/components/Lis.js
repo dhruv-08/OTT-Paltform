@@ -163,7 +163,7 @@ function Lis() {
                     </DialogContent>
                 </Dialog>}
               <Dialog fullScreen open={open} onClose={handleClose}>
-                     <Nav/>
+                     <Nav  check={true}/>
                 <Data movie={bool}/>
                  <div className="main">
                      <Grid container>
