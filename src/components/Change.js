@@ -25,8 +25,8 @@ function Change() {
             }, 2000);
     }
     return (
-        <div style={{textAlign:"center"}}>
-            <Nav/>
+        <div style={{textAlign:"center",backgroundColor:"white",height:"720px"}}>
+            <Nav check={true}/>
             <div style={{paddingTop:"10%"}}>
            <h1>Want to Change you Password?</h1><br/><br/>
            <form noValidate autoComplete="off" onSubmit={(e)=>handleSub(e)}>

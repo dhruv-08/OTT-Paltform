@@ -4,35 +4,15 @@ import { Link, useHistory} from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Grid, Menu, MenuItem } from '@material-ui/core';
 import Axios from 'axios';
-import TocIcon from '@material-ui/icons/Toc';
 import ListIcon from '@material-ui/icons/List';
-
-import SimpleBar from 'simplebar';
-import 'simplebar/dist/simplebar.css';
-import ResizeObserver from 'resize-observer-polyfill';
-
-
-
-
-
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import { Scrollbars } from 'react-custom-scrollbars';
 
-
-
-
-
-window.ResizeObserver = ResizeObserver;
 
 
 const useStyles = makeStyles({

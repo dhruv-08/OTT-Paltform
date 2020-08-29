@@ -23,6 +23,6 @@ const request = {
   Adventure: `/discover/movie?api_key=${API_KEY}&with_genres=12`,
   Western: `/discover/movie?api_key=${API_KEY}&with_genres=37`,
   TvShows: `/discover/movie?api_key=${API_KEY}&with_genres=10770`,
-  // search: `/search/multi?api_key=${API_KEY}`,
+  search: `/search/multi?api_key=${API_KEY}`,
 };
 export default request;

@@ -2,7 +2,8 @@
     height: 1000px;
     color: white;
     object-fit: contain;
-    box-shadow: inset 500px 170px 550px #111;
+    /* box-shadow: inset 500px 170px 550px #111; */
+    box-shadow:  inset 0px -300px 144px -38px #111;
 }
 .banner_conten{
     

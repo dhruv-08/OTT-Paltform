@@ -10,12 +10,16 @@
     color: white;
     padding-left: 1%;
 }
+.row{
+    padding: 8px;
+    padding-left: 20px;
+}
 .row_posters > div{
     display: flex;
     overflow-x: scroll;
     overflow-y: hidden;
     padding: 8px;
-    padding-left: 20px;
+    padding-left: 15px;
 }
 .row_posters > div::-webkit-scrollbar {
     display: none;
