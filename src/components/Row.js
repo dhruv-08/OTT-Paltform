@@ -2,11 +2,9 @@ import {Dialog, Grid, Menu, MenuItem} from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import Data from './Data'
 import { Link, useHistory} from 'react-router-dom';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import axios from '../Axios/axios'
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import '../row.css';
-import Axios from 'axios';
 import StarsIcon from '@material-ui/icons/Stars';
 import FlipMove from 'react-flip-move';
 import movieTrailer from 'movie-trailer';

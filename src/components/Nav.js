@@ -7,6 +7,10 @@ import Axios from 'axios';
 import TocIcon from '@material-ui/icons/Toc';
 import ListIcon from '@material-ui/icons/List';
 
+import SimpleBar from 'simplebar';
+import 'simplebar/dist/simplebar.css';
+import ResizeObserver from 'resize-observer-polyfill';
+
 
 
 
@@ -22,12 +26,13 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import CustomScroll from 'react-custom-scroll';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 
 
 
 
+window.ResizeObserver = ResizeObserver;
 
 
 const useStyles = makeStyles({
@@ -72,7 +77,7 @@ function Nav({check}) {
         onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
       >
-        <CustomScroll>
+        <div className="sc" data-simplebar>
         <List>
             <ListItem button>
                   <ListItemText primary={"Home"} />
@@ -133,8 +138,8 @@ function Nav({check}) {
               </ListItem>
               <ListItem button>
                   <ListItemText primary={"Adventure"} />
-              </ListItem>           
-        </List></CustomScroll>
+              </ListItem>      
+        </List></div>
       </div>
     );
 
@@ -168,7 +173,7 @@ function Nav({check}) {
   return()=>{
     if(check===false){
       window.removeEventListener("scroll",()=>{
-        if(window.scrollY>50){
+        if(window.scrollY> 50){
             setshow(true);
         }
         else{

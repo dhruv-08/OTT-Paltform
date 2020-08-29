@@ -19,6 +19,7 @@
     "react-animations": "^1.0.0",
     "react-card-flip": "^1.0.11",
     "react-custom-scroll": "^4.2.1",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.13.1",
     "react-flip-move": "^3.0.4",
     "react-helmet": "^6.1.0",
@@ -28,7 +29,9 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-youtube": "^7.12.0",
-    "react-youtube-background": "^1.0.0"
+    "react-youtube-background": "^1.0.0",
+    "resize-observer-polyfill": "^1.5.1",
+    "simplebar": "^6.0.0-beta.2"
   },
   "scripts": {
     "start": "react-scripts start",
