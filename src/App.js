@@ -21,6 +21,8 @@ import Horror from "./components/Horror";
 import Romance from "./components/Romance";
 import Animated from "./components/Animated";
 import Drama from "./components/Drama";
+import Family from "./components/Family";
+import Fantasy from "./components/Fantasy";
 function App() {
 
   return( 
@@ -41,6 +43,8 @@ function App() {
                 <Route exact path="/romance" component={()=><Romance/>}/>
                 <Route exact path="/animated" component={()=><Animated/>}/>
                 <Route exact path="/drama" component={()=><Drama/>}/>
+                <Route exact path="/family" component={()=><Family/>}/>
+                <Route exact path="/fantasy" component={()=><Fantasy/>}/>
                 <Route exact path="/logout" component={()=><Login/>}/>
                 <Route exact path="/card" component={()=><Card/>}/>
                 <Route exact path="/list" component={()=><Lis/>}/>
