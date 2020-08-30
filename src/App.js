@@ -17,6 +17,7 @@ import Mystery from "./components/Mystery";
 import Crime from "./components/Crime";
 import Thriller from "./components/Thriller";
 import Doc from "./components/Doc";
+import Horror from "./components/Horror";
 function App() {
 
   return( 
@@ -33,6 +34,7 @@ function App() {
                 <Route exact path="/crime" component={()=><Crime/>}/>
                 <Route exact path="/thriller" component={()=><Thriller/>}/>
                 <Route exact path="/doc" component={()=><Doc/>}/>
+                <Route exact path="/horror" component={()=><Horror/>}/>
                 <Route exact path="/logout" component={()=><Login/>}/>
                 <Route exact path="/card" component={()=><Card/>}/>
                 <Route exact path="/list" component={()=><Lis/>}/>
