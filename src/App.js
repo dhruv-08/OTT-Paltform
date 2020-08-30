@@ -15,6 +15,7 @@ import Comedy from "./components/Comedy";
 import Tv from "./components/Tv";
 import Mystery from "./components/Mystery";
 import Crime from "./components/Crime";
+import Thriller from "./components/Thriller";
 function App() {
 
   return( 
@@ -29,6 +30,7 @@ function App() {
                 <Route exact path="/tvShow" component={()=><Tv/>}/>
                 <Route exact path="/mystery" component={()=><Mystery/>}/>
                 <Route exact path="/crime" component={()=><Crime/>}/>
+                <Route exact path="/thriller" component={()=><Thriller/>}/>
                 <Route exact path="/logout" component={()=><Login/>}/>
                 <Route exact path="/card" component={()=><Card/>}/>
                 <Route exact path="/list" component={()=><Lis/>}/>

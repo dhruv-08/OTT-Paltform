@@ -93,7 +93,7 @@ function Row({title,fetch,large}) {
         for(var i=0;i<mov.length;i++){
             array[i]=mov[i].id;
         }
-        if(!array.includes(movie.id)){
+        if(!array.includes(movie.id) && tt===false){
             settt(true);
             setsuccess(true);
             setTimeout(() => {
