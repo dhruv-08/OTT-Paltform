@@ -19,6 +19,7 @@ import Thriller from "./components/Thriller";
 import Doc from "./components/Doc";
 import Horror from "./components/Horror";
 import Romance from "./components/Romance";
+import Animated from "./components/Animated";
 function App() {
 
   return( 
@@ -37,6 +38,7 @@ function App() {
                 <Route exact path="/doc" component={()=><Doc/>}/>
                 <Route exact path="/horror" component={()=><Horror/>}/>
                 <Route exact path="/romance" component={()=><Romance/>}/>
+                <Route exact path="/animated" component={()=><Animated/>}/>
                 <Route exact path="/logout" component={()=><Login/>}/>
                 <Route exact path="/card" component={()=><Card/>}/>
                 <Route exact path="/list" component={()=><Lis/>}/>

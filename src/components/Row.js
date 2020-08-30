@@ -50,7 +50,7 @@ function Row({title,fetch,large}) {
             setmovies(val.data.results);
         }
         async function fun(){
-            const val=await Axios.get("/movlist",{timeout:8000});
+            const val=await Axios.get("/movlist",{timeout:6000});
             setmov(val.data[0].list);
         }
     fun();
