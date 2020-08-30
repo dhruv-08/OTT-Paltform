@@ -11,7 +11,6 @@ import axios from '../Axios/axios'
 import CloseIcon from '@material-ui/icons/Close';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import '../row.css';
-import StarsIcon from '@material-ui/icons/Stars';
 import FlipMove from 'react-flip-move';
 import movieTrailer from 'movie-trailer';
 import AddIcon from '@material-ui/icons/Add';
@@ -19,12 +18,13 @@ import ReactPlayer from 'react-player'
 import Nav from './Nav';
 import Slide from '@material-ui/core/Slide';
 import YouTubeIcon from '@material-ui/icons/YouTube';
+import CircularProgress from '@material-ui/core/CircularProgress';
 const API_KEY = "7e0f5e57c7fdc5e30af84956f6d5a5c8";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const baseURL="https://image.tmdb.org/t/p/original";
-function Row({title,fetch,large}) {
+function Row({title,fetch,large,e}) {
     const history = useHistory();
     const [movies, setmovies] = useState([]);
     const [bool, setbool] = useState([]);
@@ -44,17 +44,18 @@ function Row({title,fetch,large}) {
         setOpenn(false);
         settrailer("");
     };
+    console.log(e);
     useEffect(() => {
         async function Data(){
             const val=await axios.get(fetch);
             setmovies(val.data.results);
-        }
+        }         
         async function fun(){
-            const val=await Axios.get("/movlist",{timeout:6000});
+            const val=await Axios.get("/movlist",{timeout:5000});
             setmov(val.data[0].list);
         }
     fun();
-        Data();
+    Data();
     }, [fetch]);
     const [anchorEl, setAnchorEl] = useState(null);
     function handleModal(movie){
@@ -65,7 +66,7 @@ function Row({title,fetch,large}) {
         }).catch(err=>{
             console.log("Done");
         });
-        setbool(movie);
+            setbool(movie);
         // const page=Math.floor(Math.random()*(5-1))+1;
         getData();
         async function getData(){
@@ -105,7 +106,6 @@ function Row({title,fetch,large}) {
             }).catch(err=>{
                 console.log("Done");
             })
-            // window.location.reload(false);
         }
         else{
             seterr(true);
@@ -151,26 +151,6 @@ function Row({title,fetch,large}) {
                             ))}
                             </FlipMove>
                         </Grid>
-                        
-                    {/* <Grid container>
-                        <Grid item xs={6}>
-                            <ReactPlayer controls={true} light={true} url={trailer} className="player"/>
-                        </Grid>
-                        <Grid item xs={6} style={{paddingTop:"14%"}}>
-                            <Grid container>
-                            <Grid item xs={4}>
-                                <h1 style={{color:"white"}}><StarsIcon/><span> {bool.vote_average}(Rating)</span></h1>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <h1 style={{color:"white"}}><CalendarTodayIcon/><span> {bool.release_date}</span></h1>
-                            </Grid>
-                            <Grid item xs={4}>
-                            <h1 style={{color:"white"}}>{bool.adult===true?"A":"U/A"}</h1>
-                            </Grid>
-                            </Grid>
-                        </Grid>
-                    </Grid> */}
-
                     </div>
             </Dialog>
             <Dialog open={openn} maxWidth='xl' onClose={handleClos} TransitionComponent={Transition}>

@@ -13,17 +13,6 @@ function Fantasy() {
             <Row title="Most Watched" large={true} fetch={Fantasyreq.Fantasy3}/>
             <Row title="Blockbuster Fantasy" large={true} fetch={Fantasyreq.Fantasy4}/>
             <Row title="Action Fantasy" large={true} fetch={Fantasyreq.Fantasy5}/>
-            <Row title="Sci-Fi Fantasy" large={true} fetch={Fantasyreq.Fantasy6}/>
-            <Row title="Drama Fantasy" large={true} fetch={Fantasyreq.Fantasy7}/>
-            <Row title="Mystery Fantasy" large={true} fetch={Fantasyreq.Fantasy8}/>
-            <Row title="Horror Fantasy" large={true} fetch={Fantasyreq.Fantasy9}/>
-            <Row title="Family Fantasy" large={true} fetch={Fantasyreq.Fantasy10}/>
-            <Row title="Fiction Fantasy" large={true} fetch={Fantasyreq.Fantasy11}/>
-            <Row title="Animated Fantasy" large={true} fetch={Fantasyreq.Fantasy12}/>
-            <Row title="Supernatural Fantasy" large={true} fetch={Fantasyreq.Fantasy13}/>
-            <Row title="Suspenseful Fantasy" large={true} fetch={Fantasyreq.Fantasy14}/>
-            <Row title="Adventure Fantasy" large={true} fetch={Fantasyreq.Fantasy15}/>
-            <Row title="Thriller Fantasy" large={true} fetch={Fantasyreq.Fantasy16}/>
      </div>
         </div>
     )

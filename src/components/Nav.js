@@ -30,7 +30,7 @@ function Nav({check}) {
   const history = useHistory();
     const [anchorEl, setAnchorEl] = useState(null);
     const [show, setshow] = useState(false);
-
+    
 
     const classes = useStyles();
     const [state, setState] = React.useState({
@@ -106,19 +106,7 @@ function Nav({check}) {
               </ListItem></Link>
               <Link to="/history" style={{textDecoration:"none",color:"white"}}><ListItem button>
                   <ListItemText primary={"History"} />
-              </ListItem></Link>
-              <ListItem button>
-                  <ListItemText primary={"Western"} />
-              </ListItem>
-              <ListItem button>
-                  <ListItemText primary={"Music"} />
-              </ListItem>
-              <ListItem button>
-                  <ListItemText primary={"War"} />
-              </ListItem>
-              <ListItem button>
-                  <ListItemText primary={"Adventure"} />
-              </ListItem>      
+              </ListItem></Link>     
         </List></div>
       </div>
     );

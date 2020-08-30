@@ -13,17 +13,6 @@ function Drama() {
             <Row title="Most watched" large={true} fetch={Dramareq.Drama3}/>
             <Row title="Crime Drama" large={true} fetch={Dramareq.Drama4}/>
             <Row title="Drama Based on Nooks" large={true} fetch={Dramareq.Drama5}/>
-            <Row title="Drama Based on Real Life" large={true} fetch={Dramareq.Drama6}/>
-            <Row title="Family Drama" large={true} fetch={Dramareq.Drama7}/>
-            <Row title="Independent Dramas" large={true} fetch={Dramareq.Drama8}/>
-            <Row title="Sci-fi Drama" large={true} fetch={Dramareq.Drama9}/>
-            <Row title="Drama Mystery" large={true} fetch={Dramareq.Drama10}/>
-            <Row title="Drama Adventure" large={true} fetch={Dramareq.Drama11}/>
-            <Row title="Drama fantasy" large={true} fetch={Dramareq.Drama12}/>
-            <Row title="Drama fiction" large={true} fetch={Dramareq.Drama13}/>
-            <Row title="Drama Animated" large={true} fetch={Dramareq.Drama14}/>
-            <Row title="Romantic Drama" large={true} fetch={Dramareq.Drama15}/>
-            <Row title="Military Dramas" large={true} fetch={Dramareq.Drama16}/>
      </div>
         </div>
     )

@@ -133,7 +133,7 @@ function Search() {
         }}
         />
         {search.length===0 && <h1 style={{color:"white",width:"400px",fontWeight:"lighter",paddingTop:"2%",paddingLeft:"1%"}}>Want to find movie ? Search</h1>}
-    {search.length!==0 && <h1 style={{color:"white",width:"400px",fontWeight:"lighter",paddingTop:"2%",paddingLeft:"1%"}}>Search found ({search.length})</h1>}
+    {search.length!==0 && <h1 style={{color:"white",width:"400px",fontWeight:"lighter",paddingTop:"2%",paddingLeft:"1%"}}>Search found :</h1>}
        {/* {search.length===0 && <Grid container className="pos" style={{paddingTop:"2%"}}>
        <FlipMove>
                     {movies.map(movie=>

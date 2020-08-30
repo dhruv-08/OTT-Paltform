@@ -13,17 +13,6 @@ function Thriller() {
             <Row title="Most Watched" large={true} fetch={Thrillerreq.Thriller3}/>
             <Row title="Crime Thriller" large={true} fetch={Thrillerreq.Thriller4}/>
             <Row title="Action Thriller" large={true} fetch={Thrillerreq.Thriller5}/>
-            <Row title="Psychological Thriller" large={true} fetch={Thrillerreq.Thriller6}/>
-            <Row title="Sci-Fi Thriller" large={true} fetch={Thrillerreq.Thriller7}/>
-            <Row title="Mystery Thriller" large={true} fetch={Thrillerreq.Thriller8}/>
-            <Row title="Techno" large={true} fetch={Thrillerreq.Thriller9}/>
-            <Row title="Film Noir" large={true} fetch={Thrillerreq.Thriller10}/>
-            <Row title="Political thriller" large={true} fetch={Thrillerreq.Thriller11}/>
-            <Row title="Spy thriller" large={true} fetch={Thrillerreq.Thriller12}/>
-            <Row title="Legal thriller" large={true} fetch={Thrillerreq.Thriller13}/>
-            <Row title="Historic thriller" large={true} fetch={Thrillerreq.Thriller14}/>
-            <Row title="Family Thriller" large={true} fetch={Thrillerreq.Thriller15}/>
-            <Row title="Thriller" large={true} fetch={Thrillerreq.Thriller16}/>
      </div>
         </div>
     )
