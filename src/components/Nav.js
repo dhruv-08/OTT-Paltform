@@ -59,18 +59,18 @@ function Nav({check}) {
       >
         <div className="sc" data-simplebar>
         <List>
-            <ListItem button>
-                  <ListItemText primary={"Home"} />
-              </ListItem>
-              <ListItem button>
+        <Link to="/home" style={{textDecoration:"none",color:"white"}}><ListItem button>
+            <ListItemText primary={"Home"} />
+              </ListItem></Link>
+              <Link to="/action" style={{textDecoration:"none",color:"white"}}><ListItem button>
                   <ListItemText primary={"Action"} />
-              </ListItem>
-              <ListItem button>
+              </ListItem></Link>
+              <Link to="/sci_fi" style={{textDecoration:"none",color:"white"}}><ListItem button>
                   <ListItemText primary={"Sci-Fi"} />
-              </ListItem>
-              <ListItem button>
+              </ListItem></Link>
+              <Link to="/comedy" style={{textDecoration:"none",color:"white"}}><ListItem button>
                   <ListItemText primary={"Comedy"} />
-              </ListItem>
+              </ListItem></Link>
               <ListItem button>
                   <ListItemText primary={"Mystery"} />
               </ListItem>

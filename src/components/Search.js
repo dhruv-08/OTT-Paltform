@@ -106,7 +106,7 @@ function Search() {
             seterr(true);
             setTimeout(() => {
                 seterr(false);
-            }, 3000);
+            }, 2000);
         }
     }
     async function handlesearch(){
@@ -170,7 +170,7 @@ function Search() {
             </Grid>}
             </div>
             <Dialog open={open} maxWidth='lg' onClose={handleClose} TransitionComponent={Transition}>
-                <div className="main" style={{backgroundColor:"#111"}}>
+                <div className="main" style={{backgroundColor:"#111",overflowX:"hidden"}}>
                 <header className="banne"  style={{
                 backgroundSize:"cover",
                 position:"relative",

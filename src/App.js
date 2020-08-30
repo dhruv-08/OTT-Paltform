@@ -9,6 +9,9 @@ import Card from './components/Card';
 import Set from './components/Set';
 import {Switch,Route} from 'react-router-dom'
 import Search from "./components/Search";
+import Action from "./components/Action";
+import Sci from "./components/Sci";
+import Comedy from "./components/Comedy";
 function App() {
 
   return( 
@@ -17,7 +20,9 @@ function App() {
         <Switch>
                 <Route exact path="/" component={()=><Login/>}/>
                 <Route exact path="/home" component={()=><Main/>}/>
-                <Route exact path="/action" component={()=><Main/>}/>
+                <Route exact path="/action" component={()=><Action/>}/>
+                <Route exact path="/sci_fi" component={()=><Sci/>}/>
+                <Route exact path="/comedy" component={()=><Comedy/>}/>
                 <Route exact path="/logout" component={()=><Login/>}/>
                 <Route exact path="/card" component={()=><Card/>}/>
                 <Route exact path="/list" component={()=><Lis/>}/>

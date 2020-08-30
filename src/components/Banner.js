@@ -46,7 +46,7 @@ function Banner() {
             seterr(true);
             setTimeout(() => {
                 seterr(false);
-            }, 3000);
+            }, 2000);
         }
     }
     useEffect(()=>{

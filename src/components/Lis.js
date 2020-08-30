@@ -68,6 +68,12 @@ function Lis() {
         }
         fun();
      },[check]);
+     function handleAlready(){
+        seterr(true);
+        setTimeout(() => {
+            seterr(false);
+        }, 2000);
+     }
     function handleModal(movie){
         setOpen(true);
         movieTrailer(movie?.name || movie?.title || movie?.original_name)
@@ -85,69 +91,6 @@ function Lis() {
         }
     }
     return (
-        // <div>
-        //    <Nav check={true}/>
-        //    <FlipMove>
-        //    {movies.map(movie=>(
-        //        movie!==null &&
-        //        <div key={movie.id}>
-        //             <List key={movie.id} component="nav" style={{paddingTop:"50px"}}>
-        //             <ListItem button>
-        //             <Grid container>
-        //                             <Grid item xs style={{padding:"2%"}}>
-        //                             <img style={{width:"300px",height:"300px",paddingLeft:"100px"}} src={`${baseURL}${movie.backdrop_path}`} onClick={()=>handleModal(movie)} alt="movie"/>
-        //                             </Grid>
-        //                             <Grid item xs style={{padding:"7%"}}>
-        //                                <h1>{movie.name}</h1>
-        //                                <p>{movie.overview}</p>
-        //                             </Grid>
-        //                             <Grid item xs style={{paddingTop:"7%"}}>
-        //                                <HighlightOffIcon style={{fontSize:"30px"}} onClick={()=>handleDelete(movie)}/>
-                                       
-        //                             </Grid>
-        //                 </Grid>
-        //                 </ListItem>
-        //             </List>
-        //             <Dialog fullScreen open={open} onClose={handleClose}>
-        //             <Nav/>
-        //         <Data movie={bool}/>
-        //         <div className="main" >
-        //             <Grid container spacing={2}>
-        //                 <Grid item xs>
-        //                     <ReactPlayer controls={true} light={true} url={trailer} className="player"/>
-        //                 </Grid>
-        //                 <Grid item xs style={{paddingTop:"14%"}}>
-        //                     <Grid container spacing={3}>
-        //                     <Grid item xs>
-        //                         <h1 style={{color:"white"}}><StarsIcon/><span> {bool.vote_average}(Rating)</span></h1>
-        //                     </Grid>
-        //                     <Grid item xs>
-        //                         <h1 style={{color:"white"}}><CalendarTodayIcon/><span> {bool.release_date}</span></h1>
-        //                     </Grid>
-        //                     <Grid item xs>
-        //                     <h1 style={{color:"white"}}>{bool.adult===true?"A":"R"}</h1>
-        //                     </Grid>
-        //                     </Grid>
-        //                 </Grid>
-        //             </Grid>
-        //             </div>
-        //     </Dialog>
-        //         </div>
-        //     ))}
-        //     </FlipMove>
-        //     {success===true && <Dialog
-        //             open={true}
-        //             aria-labelledby="alert-dialog-title"
-        //             aria-describedby="alert-dialog-description">
-        //             <DialogTitle id="alert-dialog-title">Deleted from list Successfully</DialogTitle>
-        //             <DialogContent>
-        //             <DialogContentText id="alert-dialog-description">
-        //             <img src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif" alt="success" style={{width:"250px",height:"200px"}}/>
-        //             </DialogContentText>
-        //             </DialogContent>
-        //         </Dialog>}
-
-        // </div>
         <div>
             <Helmet>
                 <style>{'body { background-color: #1a1a1a; }'}</style>
@@ -187,7 +130,7 @@ function Lis() {
                     </DialogContent>
                 </Dialog>}
                 <Dialog open={open} maxWidth='lg' onClose={handleClose} TransitionComponent={Transition}>
-                <div className="main" style={{backgroundColor:"#111"}}>
+                <div className="main" style={{backgroundColor:"#111",overflowX:"hidden"}}>
                 <header className="banne"  style={{
                 backgroundSize:"cover",
                 position:"relative",
@@ -204,7 +147,7 @@ function Lis() {
                                 {bool.overview}
                             </div>
                         </div>
-                        <div style={{paddingLeft:"2%",paddingTop:"2%",paddingBottom:"2%"}}><AddIcon style={{color:"white",fontSize:"60px"}}/><br/><span style={{color:"white",fontSize:"20px"}}>Already Present in List</span></div>
+                        <div style={{paddingLeft:"2%",paddingTop:"2%",paddingBottom:"2%"}} onClick={()=>handleAlready()}><AddIcon style={{color:"white",fontSize:"60px"}}/><br/><span style={{color:"white",fontSize:"20px"}}>My List</span></div>
                         <Grid container style={{width:"1200px"}} className="rowrow">
                             <FlipMove>
                         {sim.map((movie,idx)=>(

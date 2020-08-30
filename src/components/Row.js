@@ -50,7 +50,7 @@ function Row({title,fetch,large}) {
             setmovies(val.data.results);
         }
         async function fun(){
-            const val=await Axios.get("/movlist",{timeout:5000});
+            const val=await Axios.get("/movlist",{timeout:8000});
             setmov(val.data[0].list);
         }
     fun();
@@ -111,7 +111,7 @@ function Row({title,fetch,large}) {
             seterr(true);
             setTimeout(() => {
                 seterr(false);
-            }, 3000);
+            }, 2000);
         }
     }
     return(
@@ -125,7 +125,7 @@ function Row({title,fetch,large}) {
             </FlipMove>
             </div>
             <Dialog open={open} maxWidth='lg' onClose={handleClose} TransitionComponent={Transition}>
-                <div className="main" style={{backgroundColor:"#111"}}>
+                <div className="main" style={{backgroundColor:"#111",overflowX:"hidden"}}>
                 <header className="banne"  style={{
                 backgroundSize:"cover",
                 position:"relative",
