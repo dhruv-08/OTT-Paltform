@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Row from "./Row"
 import Scireq from "../Scireq.js"
-import axios from '../Axios/axios'
 import Nav from './Nav';
-function Action() {
+function Sci() {
     return (
         <div style={{backgroundColor:"#111"}}>
             <Nav check={true}/>
@@ -30,4 +29,4 @@ function Action() {
     )
 }
 
-export default Action
+export default Sci

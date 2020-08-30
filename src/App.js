@@ -12,6 +12,7 @@ import Search from "./components/Search";
 import Action from "./components/Action";
 import Sci from "./components/Sci";
 import Comedy from "./components/Comedy";
+import Tv from "./components/Tv";
 function App() {
 
   return( 
@@ -23,6 +24,7 @@ function App() {
                 <Route exact path="/action" component={()=><Action/>}/>
                 <Route exact path="/sci_fi" component={()=><Sci/>}/>
                 <Route exact path="/comedy" component={()=><Comedy/>}/>
+                <Route exact path="/tvShow" component={()=><Tv/>}/>
                 <Route exact path="/logout" component={()=><Login/>}/>
                 <Route exact path="/card" component={()=><Card/>}/>
                 <Route exact path="/list" component={()=><Lis/>}/>

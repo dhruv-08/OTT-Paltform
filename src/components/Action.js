@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Row from "./Row"
 import Actionreq from "../Actionreq";
-import axios from '../Axios/axios'
 import Nav from './Nav';
 function Action() {
     return (
