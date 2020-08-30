@@ -71,9 +71,9 @@ function Nav({check}) {
               <Link to="/comedy" style={{textDecoration:"none",color:"white"}}><ListItem button>
                   <ListItemText primary={"Comedy"} />
               </ListItem></Link>
-              <ListItem button>
+              <Link to="/mystery" style={{textDecoration:"none",color:"white"}}><ListItem button>
                   <ListItemText primary={"Mystery"} />
-              </ListItem>
+              </ListItem></Link>
               <ListItem button>
                   <ListItemText primary={"Crime"} />
               </ListItem>
