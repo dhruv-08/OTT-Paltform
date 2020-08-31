@@ -24,6 +24,7 @@ import Drama from "./components/Drama";
 import Family from "./components/Family";
 import Fantasy from "./components/Fantasy";
 import History from "./components/History";
+import Checkout from "./Stripe/Checkout";
 function App() {
 
   return( 
@@ -47,7 +48,7 @@ function App() {
                 <Route exact path="/family" component={()=><Family/>}/>
                 <Route exact path="/fantasy" component={()=><Fantasy/>}/>
                 <Route exact path="/history" component={()=><History/>}/>
-                <Route exact path="/logout" component={()=><Login/>}/>
+                <Route exact path="/" component={()=><Login/>}/>
                 <Route exact path="/card" component={()=><Card/>}/>
                 <Route exact path="/list" component={()=><Lis/>}/>
                 <Route exact path="/profile" component={()=><Profile/>}/>
@@ -55,6 +56,7 @@ function App() {
                 <Route exact path="/forget" component={()=><Forget/>}/>
                 <Route exact path="/set" component={()=><Set/>}/>
                 <Route exact path="/search" component={()=><Search/>}/>
+                <Route exact path="/checkout" component={()=><Checkout/>}/>
             </Switch>
       </div>
   );

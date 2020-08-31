@@ -16,6 +16,7 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 import CloseIcon from '@material-ui/icons/Close';
 import Axios from 'axios';
 import { Helmet } from 'react-helmet';
+import '../list.css'
 const baseURL="https://image.tmdb.org/t/p/original";
 const API_KEY = "7e0f5e57c7fdc5e30af84956f6d5a5c8";
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -91,16 +92,17 @@ function Lis() {
         }
     }
     return (
-        <div>
+        <div style={{overflow:"hidden"}}>
             <Helmet>
                 <style>{'body { background-color: #1a1a1a; }'}</style>
             </Helmet>
              <Nav check={true}/>
              {length!==0 && <div style={{paddingTop:"50px"}}>
-                <div style={{textAlign:"center",padding:"4.5%"}}><h1 style={{color:"white",fontWeight:"lighter",fontSize:"40px"}}>My List</h1></div>
+                <div style={{textAlign:"center",padding:"2.8%"}}><h1 style={{color:"white",fontWeight:"lighter",fontSize:"40px"}}>My List</h1></div>
+                <div className="list">  
             <FlipMove>
                     {movies.map(movie=>
-                    <Grid key={movie.id} container>
+                    <Grid key={movie.id} container style={{padding:"2%"}}>
                         <Grid item xs={12} style={{paddingBottom:"2%"}}>
                         <div className="poster" style={{width:"1000px",height:"450px",borderRadius:"15px",margin:"auto",boxShadow: "inset 600px 100px 550px #111",backgroundRepeat:"no-repeat",backgroundSize:"cover",backgroundImage:`url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`}}>
                         <div style={{paddingLeft:"2%",paddingTop:"1%"}}>
@@ -116,7 +118,7 @@ function Lis() {
                         </Grid>
                         </Grid>
                     )}
-                    </FlipMove>
+                    </FlipMove></div>
                     {success===true && <Dialog
                     style={{color:"black"}}
                     open={true}

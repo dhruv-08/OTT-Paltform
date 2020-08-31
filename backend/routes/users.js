@@ -4,11 +4,43 @@ var User=require('../models/user');
 var bodyParser=require('body-parser');
 var passport=require('passport');
 var nodemailer=require('nodemailer');
+const stripe = require('stripe')('sk_test_51HKVO4AfnE0MoBcQjLsMVIqWxJ5xz1ax2XS9enr30OlbbilhdZ5p7CKZjXf1z9FeuQq2YuIsfJTFpi4gTe83Jg0o000R5HBLmW');
 const { authenticate } = require('passport');
 /* GET users listing. */
 router.use(bodyParser.json());
 require('dotenv').config();
-/* GET users listing. */
+
+router.post('/pay', async (req, res) => {
+  const {email} = req.body;
+  const paymentIntent = await stripe.paymentIntents.create({
+      amount: 5000,
+      currency: 'usd',
+      metadata: {integration_check: 'accept_a_payment'},
+      receipt_email: email,
+    });
+    res.json({'client_secret': paymentIntent['client_secret']})
+})
+router.post('/sub',async(req,res)=>{
+  const {email,payment_method}=req.body;
+  const customer= await stripe.customers.create({
+    payment_method:payment_method,
+    email:email,
+    invoice_settings:{
+      default_payment_method:payment_method,
+    },
+  });
+  const subscription=await stripe.subscriptions.create({
+    customer:customer.id,
+    items:[{price:'price_1HM8cdAfnE0MoBcQ4FCLV2Kd'}],
+    expand: ['latest_invoice.payment_intent'],
+  });
+  const status=subscription['latest_invoice']['payment_intent']['status']
+  const client_secret=subscription['latest_invoice']['payment_intent']['client_secret']
+  console.log(subscription.id);
+  res.json({'client_secret':client_secret,'status':status});
+ 
+})
+
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });

@@ -6,12 +6,42 @@ import Axios from 'axios';
 import DoneIcon from '@material-ui/icons/Done';
 import CloseIcon from '@material-ui/icons/Close';
 import { Dialog, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import ReactPlayer from 'react-player'
+import movieTrailer from 'movie-trailer';
+import Slide from '@material-ui/core/Slide';
+const API_KEY = "7e0f5e57c7fdc5e30af84956f6d5a5c8";
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
 function Banner() {
     const [movie,setMovie]=useState([]);
     const [movies,setmovies]=useState([]);
     const [success,setsuccess]=useState(false);
+    const [bool, setbool] = useState([]);
+    const [trailer, settrailer] = useState("");
+    const [sim, setsim] = useState([])
     const [err,seterr]=useState(false);
     const [tt,settt]=useState(false);
+    const [openn, setOpenn] =useState(false);
+    function handleModal(movie){
+        setOpenn(true);
+        movieTrailer(movie?.name || movie?.title || movie?.original_name)
+        .then((url)=>{
+            settrailer(url);
+        }).catch(err=>{
+            console.log("Done");
+        });
+            setbool(movie);
+        getData();
+        async function getData(){
+            const find=await axios.get(`/movie/${movie.id}/similar?api_key=${API_KEY}&language=en-US&page=1`)
+            setsim(find.data.results.slice(0,9));
+        }    
+    }
+    const handleClos = () => {
+        setOpenn(false);
+        settrailer("");
+    };
     function handleList(){
         var e=[
             {
@@ -82,6 +112,11 @@ function Banner() {
                     </DialogContentText>
                     </DialogContent>
                 </Dialog>}
+                <Dialog open={openn} maxWidth='xl' onClose={handleClos} TransitionComponent={Transition}>
+                <div className="main" style={{backgroundColor:"#111",width:"650px"}}>
+                <ReactPlayer controls={true} light={true} url={trailer} className="player"/>
+                </div>
+            </Dialog>
                 {err===true && <Dialog
                     style={{color:"black"}}
                     open={true}
@@ -97,7 +132,7 @@ function Banner() {
                 <div className="banner_content">
                     <h1 className="title">{movie?.title || movie?.name || movie?.original_name}</h1>
                     <div className="banner__buttons">
-                    <button className="banner__button">Play</button>
+                    <button className="banner__button" onClick={()=>handleModal(movie)}>Play</button>
                     <button className="banner__button" onClick={()=>handleList()}>My List</button>
                     </div>
                     <div className="description">

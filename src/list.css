@@ -1,0 +1,8 @@
+.list>div{
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+.list > div::-webkit-scrollbar {
+    display: none;
+  }

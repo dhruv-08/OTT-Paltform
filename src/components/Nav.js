@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../nav.css'
 import { Link, useHistory} from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { Grid, Menu, MenuItem } from '@material-ui/core';
+import { Divider, Grid, Menu, MenuItem } from '@material-ui/core';
 import Axios from 'axios';
 import ListIcon from '@material-ui/icons/List';
 import clsx from 'clsx';
@@ -57,6 +57,8 @@ function Nav({check}) {
         onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
       >
+        <div><img src={process.env.PUBLIC_URL+"/logo.png"} style={{width:"30px",paddingTop:"7%",paddingLeft:"7%"}}/><span style={{fontSize:"25px",paddingLeft:"5%"}}>Welcome</span></div>
+        <Divider/>
         <div className="sc" data-simplebar>
         <List>
         <Link to="/home" style={{textDecoration:"none",color:"white"}}><ListItem button>
@@ -176,8 +178,9 @@ function Nav({check}) {
           <Grid item xs={8}>
           <div style={{paddingTop:"3%"}}><Link style={{textDecoration:"none",color:"red",fontSize:"25px",fontWeight:"bold",fontFamily: 'Alata'}} to="/home">MOVIES TALK</Link>
           </div></Grid>
-            </Grid></div>
-            <AccountCircleIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{paddingTop:"0.8%",paddingRight:"1.5%",fontSize:"35px"}}/>
+            </Grid></div><span style={{display:"flex",paddingLeft:"77%"}}>
+              <div style={{paddingTop:"2%",paddingRight:"2%",fontSize:"35px"}}>
+            <img aria-controls="simple-menu"aria-haspopup="true" onClick={handleClick} src={process.env.PUBLIC_URL+"/logo.png"} style={{width:"28px"}}/></div>
             <Menu
             id="simple-menu"
             anchorEl={anchorEl}
@@ -188,8 +191,8 @@ function Nav({check}) {
                 <MenuItem onClick={handleClose}><Link to="/profile" style={{textDecoration:"none",color:"black"}}>My Account</Link></MenuItem>
                 <MenuItem onClick={handleClose}><Link to="/list" style={{textDecoration:"none",color:"black"}}>My List</Link></MenuItem>
                 <MenuItem onClick={handleClose}><Link to="/search" style={{textDecoration:"none",color:"black"}}>Search</Link></MenuItem>
-                <MenuItem onClick={handleLogout}><Link to="/logout" style={{textDecoration:"none",color:"black"}}>Log-Out</Link></MenuItem>
-            </Menu>
+                <MenuItem onClick={handleLogout}><Link to="/" style={{textDecoration:"none",color:"black"}}>Log-Out</Link></MenuItem>
+            </Menu></span>
         </div>
     )
 }

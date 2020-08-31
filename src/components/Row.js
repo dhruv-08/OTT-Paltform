@@ -24,7 +24,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const baseURL="https://image.tmdb.org/t/p/original";
-function Row({title,fetch,large,e}) {
+function Row({title,fetch,large}) {
     const history = useHistory();
     const [movies, setmovies] = useState([]);
     const [bool, setbool] = useState([]);
@@ -36,6 +36,7 @@ function Row({title,fetch,large,e}) {
     const [tt,settt]=useState(false);
     const [err,seterr]=useState(false);
     const [mov, setmov] = useState([])
+    const [loader, setloader] = useState(false);
     const handleClose = () => {
         setOpen(false);
         settrailer("");
@@ -44,7 +45,6 @@ function Row({title,fetch,large,e}) {
         setOpenn(false);
         settrailer("");
     };
-    console.log(e);
     useEffect(() => {
         async function Data(){
             const val=await axios.get(fetch);
@@ -72,7 +72,7 @@ function Row({title,fetch,large,e}) {
         async function getData(){
             const find=await axios.get(`/movie/${movie.id}/similar?api_key=${API_KEY}&language=en-US&page=1`)
             setsim(find.data.results.slice(0,9));
-        }        
+        }    
     }
     function handleTrail(){
         setOpen(false);
@@ -125,8 +125,9 @@ function Row({title,fetch,large,e}) {
             </FlipMove>
             </div>
             <Dialog open={open} maxWidth='lg' onClose={handleClose} TransitionComponent={Transition}>
-                <div className="main" style={{backgroundColor:"#111",overflowX:"hidden"}}>
+            {sim!==[]?<div className="main" style={{backgroundColor:"#111",overflowX:"hidden"}}>
                 <header className="banne"  style={{
+                backgroundAttachment:"fixed",
                 backgroundSize:"cover",
                 position:"relative",
                 height:"650px",
@@ -151,7 +152,7 @@ function Row({title,fetch,large,e}) {
                             ))}
                             </FlipMove>
                         </Grid>
-                    </div>
+                    </div>:<div style={{color:"white"}}>hello</div>}
             </Dialog>
             <Dialog open={openn} maxWidth='xl' onClose={handleClos} TransitionComponent={Transition}>
                 <div className="main" style={{backgroundColor:"#111",width:"670px"}}>
