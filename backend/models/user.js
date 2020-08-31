@@ -12,6 +12,12 @@ var User = new Schema({
         required:true
     },
     list:[],
+    sub:{
+        type:String,
+        default:"empty",
+        required:false
+    },
+    genre:[]
 });
 
 User.plugin(passportLocalMongoose);

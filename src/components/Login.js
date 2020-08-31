@@ -19,6 +19,7 @@ function Login() {
     const [open, setOpen] = useState(false);
     const [success, setsuccess] = useState(false);
     const [sign, setsign] = useState(false);
+    const [subs, setsubs] = useState("");
     const [isFlipped, setisFlipped] = useState(false)
     const [values, setValues] = React.useState({
         showPassword: false,
@@ -81,7 +82,13 @@ function Login() {
             setlogpass("");
             setloguser("");
             setlogemail("");
-            history.replace("/home",null);
+            console.log(res.data.status);
+            if(res.data.status==='true'){
+                history.replace("/home",null);
+            }
+            else{
+                history.replace("/checkout",null);
+            }
         })
         .catch((res)=>{
             setlogpass("");

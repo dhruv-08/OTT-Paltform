@@ -19,7 +19,7 @@ function Main() {
             <Row title="Mystery" fetch={request.Mystery}/>
             <Row title="Crime" fetch={request.Crime}/>
             <Row title="Tv Shows" fetch={request.TvShows}/>
-            <Row title="Thriller" fetch={request.Thriller}/>
+            <Row title="Thriller" large={true} fetch={request.Thriller}/>
             <Row title="Documentaries" fetch={request.Documentaries}/>
             <Row title="Horror" fetch={request.Horror}/>
             <Row title="Romance" fetch={request.Romance}/>

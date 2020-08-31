@@ -24,7 +24,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const baseURL="https://image.tmdb.org/t/p/original";
-function Row({title,fetch,large}) {
+function Row({title,extralarge,fetch,large}) {
     const history = useHistory();
     const [movies, setmovies] = useState([]);
     const [bool, setbool] = useState([]);
@@ -116,8 +116,8 @@ function Row({title,fetch,large}) {
     }
     return(
         <div className="row" >
-            <h1 className="heading" style={{fontWeight:"lighter",fontSize:"20px",paddingLeft:"1.2%"}}>{title}</h1>
-            <div className="row_posters">
+            <h1 className="heading" style={{fontSize:"25px",paddingLeft:"1.2%"}}>{title}</h1>
+           <div className="row_posters">
                 <FlipMove>
             {movies.map(movie=>(
                    movie.backdrop_path?<img key={movie?.id} src={`${baseURL}${large===true?movie?.poster_path:movie?.backdrop_path}`} alt={movie?.title} className={large===true?"row_large":"row_poster"} onClick={()=>handleModal(movie)}/>:<div key={movie.id}>{console.log(movie?.name||movie?.title)}</div>

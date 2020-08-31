@@ -7,10 +7,13 @@ import CardInput from './CardInput';
 import {useStripe, useElements, CardElement, Elements} from '@stripe/react-stripe-js';
 import {makeStyles} from '@material-ui/core/styles';
 import axios from 'axios';
+import { Grid } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles({
     root: {
       maxWidth: 500,
-      margin: '35vh auto',
+      paddingTop:"33%",
+      // paddingLeft:"16%"
     },
     content: {
       display: 'flex',
@@ -32,9 +35,7 @@ function Form() {
   const [email, setEmail] = useState('');
   const stripe = useStripe();
   const elements = useElements();
-  
-    //   console.log(new Date('Mon Aug 31 2020 15:14:28 GMT+0530')==new Date('Mon Aug 31 2020 15:14:28 GMT+0530'));
-  
+  const history = useHistory();
   const handleSubmit = async (event) => {
     if (!stripe || !elements) {
       return;
@@ -79,40 +80,49 @@ function Form() {
       else{
         const res=await axios.post('/sub',{'payment_method':result.paymentMethod.id,'email':email})
         console.log(res.data);
-        console.log("hello");
         const {client_secret,status}=res.data;
         if(status==='succeeded'){
-            console.log('You got the money!');
+            console.log('Subscribed Successfully!');
+            history.replace("/home",null);
         }
       }
       
   }
     return (
-        <Card className={classes.root}>
-      <CardContent className={classes.content}>
-        <TextField
-          label='Email'
-          id='outlined-email-input'
-          helperText={`Email you'll recive updates and receipts on`}
-          margin='normal'
-          variant='outlined'
-          type='email'
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          fullWidth
-        />
-        <CardInput />
-        <div className={classes.div}>
-          <Button variant="contained" color="primary" className={classes.button} onClick={handleSubmit}>
-            Pay
-          </Button>
-          <Button variant="contained" color="primary" className={classes.button} onClick={handleSub}>
-            Subscription
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+      <header style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/head.jpg`})`,boxShadow:" inset 900px 2px 500px 2px #111,inset -141px 3px 175px 15px",height:"100vh",backgroundSize:"cover"}}>
+        <Grid container>
+          <Grid item xs={5}>
+              <div style={{color:"white",paddingTop:"38%",paddingLeft:"4%"}}><span style={{fontSize:"50px"}}>Welcome to Movies Talk</span><br/><span style={{fontSize:"20px",fontWeight:"lighter",letterSpacing:"3px",width:"500px",lineHeight:"30px"}}>Get commercial-free access to exclusive hit series, star-studded movies and more - there's something for every mood in just ₹100</span></div>
+          </Grid>
+          <Grid item xs={2}></Grid>
+          <Grid item xs={5}>
+          <div className={classes.root}>
+              <Card >
+            <CardContent className={classes.content}>
+              <TextField
+                label='Email'
+                id='outlined-email-input'
+                helperText={`Email you'll recive updates and receipts on`}
+                margin='normal'
+                variant='outlined'
+                type='email'
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                fullWidth
+              />
+              <CardInput />
+              <div className={classes.div}>
+                <Button variant="contained" style={{width:"500px"}} color="secondary" className={classes.button} onClick={handleSub}>
+                  Subscription
+                </Button>
+              </div>
+            </CardContent>
+          </Card></div>
+          </Grid>
+        </Grid>
+        
+    </header>
     )
 }
 

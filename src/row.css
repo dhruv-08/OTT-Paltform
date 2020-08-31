@@ -30,16 +30,27 @@
       background-color: #111;
   }
 .row_large{
+    width:285px;
+    max-height: 680px;
+    object-fit: contain;
+    /* padding-right: 1%; */
+    padding-bottom: 2%;
+    margin-right: 10px;
+    transition: 0.3s ease-in;
+}
+.row_extralarge{
     width:100%;
     max-height: 280px;
     object-fit: contain;
     /* padding-right: 1%; */
+    padding-bottom: 2%;
     margin-right: 10px;
     transition: 0.3s ease-in;
 }
 .row_poster{
     width:100%;
     max-height: 160px;
+    padding-bottom: 2%;
     object-fit: contain;
     /* padding-right: 1%; */
     margin-right: 10px;
@@ -57,5 +68,8 @@
     transform: scale(1.08);
 }
 .row_pos:hover{
+    transform: scale(1.08);
+}
+.row_extralarge:hover{
     transform: scale(1.08);
 }

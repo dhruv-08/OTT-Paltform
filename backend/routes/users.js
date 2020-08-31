@@ -36,7 +36,16 @@ router.post('/sub',async(req,res)=>{
   });
   const status=subscription['latest_invoice']['payment_intent']['status']
   const client_secret=subscription['latest_invoice']['payment_intent']['client_secret']
-  console.log(subscription.id);
+  User.find({username:req.session.passport.user})
+  .then((user)=>{
+    if(user){
+      User.update({username:req.session.passport.user},{
+        sub:subscription.id,
+      }, function(err, affected, resp) {
+        console.log(resp);
+     });
+    }
+  });
   res.json({'client_secret':client_secret,'status':status});
  
 })
@@ -107,7 +116,23 @@ router.post('/login', (req, res) => {
         passport.authenticate('local')(req, res, () => {
           res.statusCode = 200;
           res.setHeader('Content-Type', 'application/json');
-        res.json({success: true, status: 'You are successfully logged in!'});
+          if(user.sub!=='empty'){
+            async function fun(){
+              const subscription =await stripe.subscriptions.retrieve(
+                user.sub
+              );
+              if(subscription.plan.active===true){
+                res.json({success: true, status:'true'});
+              }
+              else{
+                res.json({success: true, status:'false'});
+              }
+            }
+          fun();
+          }
+          else{
+            res.json({success: true, status:'false'});
+          }
         });
       }
       else{
