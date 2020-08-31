@@ -121,7 +121,7 @@ function Nav({check}) {
   function handleLogout(){
     Axios.get("/logout")
           .then(res=>{
-              history.replace("/",null);
+              history.replace("/login",null);
           }).catch(err=>{
             console.log("Done");
         })

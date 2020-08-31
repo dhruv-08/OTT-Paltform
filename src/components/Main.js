@@ -6,6 +6,7 @@ import axios from '../Axios/axios'
 import Nav from './Nav';
 function Main() {
     return (
+        <div>
         <div style={{backgroundColor:"#111"}}>
             <Nav check={false}/>
              <Banner/>
@@ -33,6 +34,7 @@ function Main() {
             <Row title="War" fetch={request.War}/>
             <Row title="Adventure" fetch={request.Adventure}/>
      </div>
+        </div>
         </div>
     )
 }

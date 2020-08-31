@@ -25,58 +25,38 @@ import Family from "./components/Family";
 import Fantasy from "./components/Fantasy";
 import History from "./components/History";
 import Checkout from "./Stripe/Checkout";
-import Axios from "axios";
-function App() {
-  const [sess, setsess] = useState(false);
-  useEffect(() => {
-    async function fun(){
-      await Axios.get("/ses")
-    .then(res=>{
-      if(res.data.user===undefined){
-        console.log("empty");
-      }
-      else{
-        setsess(true);
-        console.log(res.data.user);
-      }
-      console.log(res);
-    }).catch(err=>{
-      console.log(err);
-    })
-    }
-    fun();
-  }, [])
+import LoginProtect from "./Protected/LoginProtect";
+function App() {  
   return( 
       <div>
         {/* <Main/> */}
         <Switch>
-                <Route exact path="/" component={()=><Login/>}/>
-                {sess===true?<Route exact path="/home" component={()=><Main/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/action" component={()=><Action/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/sci_fi" component={()=><Sci/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/comedy" component={()=><Comedy/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/tvShow" component={()=><Tv/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/mystery" component={()=><Mystery/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/crime" component={()=><Crime/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/thriller" component={()=><Thriller/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/doc" component={()=><Doc/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/horror" component={()=><Horror/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/romance" component={()=><Romance/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/animated" component={()=><Animated/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/drama" component={()=><Drama/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/family" component={()=><Family/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/fantasy" component={()=><Fantasy/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/history" component={()=><History/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/login" component={()=><Login/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/card" component={()=><Card/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/list" component={()=><Lis/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/profile" component={()=><Profile/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/change" component={()=><Change/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/forget" component={()=><Forget/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/set" component={()=><Set/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/search" component={()=><Search/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
-                {sess===true?<Route exact path="/checkout" component={()=><Checkout/>}/>:<div style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/danger.jpg`})`,backgroundPosition:"center",height:"100vh",backgroundRepeat:"no-repeat"}}></div>}
+          <>
+                <Route exact path="/" component={()=><LoginProtect/>}/>
+                <Route exact path="/home" component={()=><Main/>}/>
+                <Route exact path="/action" component={()=><Action/>}/>
+                <Route exact path="/sci_fi" component={()=><Sci/>}/>
+                <Route exact path="/comedy" component={()=><Comedy/>}/>
+                <Route exact path="/tvShow" component={()=><Tv/>}/>
+                <Route exact path="/mystery" component={()=><Mystery/>}/>
+                <Route exact path="/crime" component={()=><Crime/>}/>
+                <Route exact path="/thriller" component={()=><Thriller/>}/>
+                <Route exact path="/doc" component={()=><Doc/>}/>
+                <Route exact path="/horror" component={()=><Horror/>}/>
+                <Route exact path="/romance" component={()=><Romance/>}/>
+                <Route exact path="/animated" component={()=><Animated/>}/>
+                <Route exact path="/drama" component={()=><Drama/>}/>
+                <Route exact path="/family" component={()=><Family/>}/>
+                <Route exact path="/fantasy" component={()=><Fantasy/>}/>
+                <Route exact path="/history" component={()=><History/>}/>
+                <Route exact path="/card" component={()=><Card/>}/>
+                <Route exact path="/list" component={()=><Lis/>}/>
+                <Route exact path="/profile" component={()=><Profile/>}/>
+                <Route exact path="/change" component={()=><Change/>}/>
+                <Route exact path="/search" component={()=><Search/>}/>
+                <Route exact path="/checkout" component={()=><Checkout/>}/>
                 <Redirect to="/"/>
+                </>
             </Switch>
       </div>
   );

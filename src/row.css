@@ -30,8 +30,8 @@
       background-color: #111;
   }
 .row_large{
-    width:285px;
-    max-height: 680px;
+    width:100%;
+    max-height: 280px;
     object-fit: contain;
     /* padding-right: 1%; */
     padding-bottom: 2%;
