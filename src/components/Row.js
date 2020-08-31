@@ -1,7 +1,5 @@
-import {Dialog, Grid, Menu, MenuItem} from '@material-ui/core';
+import {Dialog, Grid} from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
-import Data from './Data'
-import { Link, useHistory} from 'react-router-dom';
 import {  DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import GradeIcon from '@material-ui/icons/Grade';
 import Axios from 'axios';
@@ -15,17 +13,14 @@ import FlipMove from 'react-flip-move';
 import movieTrailer from 'movie-trailer';
 import AddIcon from '@material-ui/icons/Add';
 import ReactPlayer from 'react-player'
-import Nav from './Nav';
 import Slide from '@material-ui/core/Slide';
 import YouTubeIcon from '@material-ui/icons/YouTube';
-import CircularProgress from '@material-ui/core/CircularProgress';
 const API_KEY = "7e0f5e57c7fdc5e30af84956f6d5a5c8";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const baseURL="https://image.tmdb.org/t/p/original";
-function Row({title,extralarge,fetch,large}) {
-    const history = useHistory();
+function Row({title,fetch,large}) {
     const [movies, setmovies] = useState([]);
     const [bool, setbool] = useState([]);
     const [trailer, settrailer] = useState("");
@@ -36,7 +31,6 @@ function Row({title,extralarge,fetch,large}) {
     const [tt,settt]=useState(false);
     const [err,seterr]=useState(false);
     const [mov, setmov] = useState([])
-    const [loader, setloader] = useState(false);
     const handleClose = () => {
         setOpen(false);
         settrailer("");
@@ -57,7 +51,6 @@ function Row({title,extralarge,fetch,large}) {
     fun();
     Data();
     }, [fetch]);
-    const [anchorEl, setAnchorEl] = useState(null);
     function handleModal(movie){
         setOpen(true);
         movieTrailer(movie?.name || movie?.title || movie?.original_name)
@@ -138,7 +131,7 @@ function Row({title,extralarge,fetch,large}) {
                 </header>
                 
                 <div style={{paddingLeft:"2%",paddingTop:"1%"}}>
-                    <div style={{color:"white",paddingBottom:"2%",paddingTop:"2%"}}><GradeIcon style={{fontSize:"15px"}}/> {bool.vote_average!=undefined?<span style={{fontSize:"20px",paddingRight:"2%"}}>{bool.vote_average}</span>:<span style={{fontSize:"25px",paddingRight:"2%"}}>N/A</span>}{bool.release_date!==undefined?<span><CalendarTodayIcon style={{fontSize:"15px"}}/> {bool.release_date}</span>:<span><CalendarTodayIcon style={{fontSize:"15px"}}/> N/A</span>}<span style={{color:"white",fontSize:"25px",paddingLeft:"2%"}}>{bool.adult===true?"A":"U/A"}</span><span style={{paddingLeft:"2%"}} onClick={()=>handleTrail()}><YouTubeIcon style={{color:"white",fontSize:"20px"}}/><span style={{fontSize:"25px"}}> Trailer</span></span></div>
+                    <div style={{color:"white",paddingBottom:"2%",paddingTop:"2%"}}><GradeIcon style={{fontSize:"15px"}}/> {bool.vote_average!==undefined?<span style={{fontSize:"20px",paddingRight:"2%"}}>{bool.vote_average}</span>:<span style={{fontSize:"25px",paddingRight:"2%"}}>N/A</span>}{bool.release_date!==undefined?<span><CalendarTodayIcon style={{fontSize:"15px"}}/> {bool.release_date}</span>:<span><CalendarTodayIcon style={{fontSize:"15px"}}/> N/A</span>}<span style={{color:"white",fontSize:"25px",paddingLeft:"2%"}}>{bool.adult===true?"A":"U/A"}</span><span style={{paddingLeft:"2%"}} onClick={()=>handleTrail()}><YouTubeIcon style={{color:"white",fontSize:"20px"}}/><span style={{fontSize:"25px"}}> Trailer</span></span></div>
                             <div style={{color:"white",fontSize:"20px",width:"1030px",fontWeight:"lighter"}}>
                                 {bool.overview}
                             </div>

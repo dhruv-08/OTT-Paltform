@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import CardInput from './CardInput';
-import {useStripe, useElements, CardElement, Elements} from '@stripe/react-stripe-js';
+import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 import {makeStyles} from '@material-ui/core/styles';
 import axios from 'axios';
 import { Grid } from '@material-ui/core';
@@ -36,32 +36,6 @@ function Form() {
   const stripe = useStripe();
   const elements = useElements();
   const history = useHistory();
-  const handleSubmit = async (event) => {
-    if (!stripe || !elements) {
-      return;
-    }
-    
-    const res = await axios.post('http://localhost:5000/pay', {email: email});
-
-    const clientSecret = res.data['client_secret'];
-
-    const result = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
-        billing_details: {
-          email: email,
-        },
-      },
-    });
-
-    if (result.error) {
-      console.log(result.error.message);
-    } else {
-      if (result.paymentIntent.status === 'succeeded') {
-        console.log('Money is in the bank!');
-      }
-    }
-  };
   const handleSub=async(event)=>{
     if (!stripe || !elements) {
         return;
@@ -80,7 +54,7 @@ function Form() {
       else{
         const res=await axios.post('/sub',{'payment_method':result.paymentMethod.id,'email':email})
         console.log(res.data);
-        const {client_secret,status}=res.data;
+        const status=res.data.status;
         if(status==='succeeded'){
             console.log('Subscribed Successfully!');
             history.replace("/home",null);

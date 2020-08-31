@@ -1,10 +1,9 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router';
 import Login from '../components/Login';
+import Main from '../components/Main';
 
 function HomeProtect() {
-    const history = useHistory();
     const [session, setsession] = useState(false)
     useEffect(() => {
         Axios.get("/ses")
@@ -13,7 +12,7 @@ function HomeProtect() {
             setsession(false);
           }
           else{
-            history.push("/home",null);
+            setsession(true);
           }
           console.log(res);
         }).catch(err=>{
@@ -23,7 +22,7 @@ function HomeProtect() {
       }, [])
     return (
         <div>
-            {session===false && <Login/>}
+            {session===true?<Main/>:<Login/>}
         </div>
     )
 }

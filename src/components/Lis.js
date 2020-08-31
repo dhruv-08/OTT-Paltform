@@ -1,9 +1,7 @@
-import { ListItem,List,Dialog, Grid, DialogTitle, DialogContent, DialogContentText } from '@material-ui/core'
+import {Dialog, Grid, DialogTitle, DialogContent, DialogContentText } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import Nav from './Nav'
-import Data from './Data'
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import StarsIcon from '@material-ui/icons/Stars';
 import GradeIcon from '@material-ui/icons/Grade';
 import AddIcon from '@material-ui/icons/Add';
 import movieTrailer from 'movie-trailer';
@@ -29,11 +27,9 @@ function Lis() {
     const [openn, setOpenn] =useState(false);
     const [check, setcheck] = useState(false)
     const [sim, setsim] = useState([])
-    const [tt,settt]=useState(false);
     const [trailer, settrailer] = useState("");
     const [success, setsuccess] = useState(false)
     const [err,seterr]=useState(false);
-    const [mov, setmov] = useState([])
     const [length, setlength] = useState(0);
     const handleClose = () => {
         setOpen(false);
@@ -109,7 +105,7 @@ function Lis() {
                             <div style={{display:"flex",justifyContent:"space-between"}}><span onClick={()=>handleModal(movie)} style={{color:"white",paddingBottom:"4%",fontWeight:"lighter",paddingTop:"2%",fontSize:"30px"}}>{movie?.title || movie?.name || movie?.original_name}</span>
                             <CloseIcon onClick={()=>handleDelete(movie)} style={{color:"white",fontSize:"20px",paddingRight:"2%",paddingTop:"2%"}}/>
                             </div>
-                    <div style={{color:"white",paddingBottom:"2%"}}><GradeIcon style={{fontSize:"15px"}}/> {movie.vote_average!=undefined?<span style={{fontSize:"20px",paddingRight:"2%"}}>{movie.vote_average}</span>:<span style={{fontSize:"20px",paddingRight:"2%"}}>N/A</span>}{movie.release_date!==undefined?<span><CalendarTodayIcon style={{fontSize:"15px"}}/> {movie.release_date}</span>:<span><CalendarTodayIcon style={{fontSize:"15px"}}/> N/A</span>}</div>
+                    <div style={{color:"white",paddingBottom:"2%"}}><GradeIcon style={{fontSize:"15px"}}/> {movie.vote_average!==undefined?<span style={{fontSize:"20px",paddingRight:"2%"}}>{movie.vote_average}</span>:<span style={{fontSize:"20px",paddingRight:"2%"}}>N/A</span>}{movie.release_date!==undefined?<span><CalendarTodayIcon style={{fontSize:"15px"}}/> {movie.release_date}</span>:<span><CalendarTodayIcon style={{fontSize:"15px"}}/> N/A</span>}</div>
                             <div style={{color:"white",width:"400px",fontWeight:"lighter"}}>
                                 {movie.overview}
                             </div>
@@ -144,7 +140,7 @@ function Lis() {
                 </header>
                 
                 <div style={{paddingLeft:"2%",paddingTop:"1%"}}>
-                    <div style={{color:"white",paddingBottom:"2%",paddingTop:"2%"}}><GradeIcon style={{fontSize:"15px"}}/> {bool.vote_average!=undefined?<span style={{fontSize:"20px",paddingRight:"2%"}}>{bool.vote_average}</span>:<span style={{fontSize:"25px",paddingRight:"2%"}}>N/A</span>}{bool.release_date!==undefined?<span><CalendarTodayIcon style={{fontSize:"15px"}}/> {bool.release_date}</span>:<span><CalendarTodayIcon style={{fontSize:"15px"}}/> N/A</span>}<span style={{color:"white",fontSize:"25px",paddingLeft:"2%"}}>{bool.adult===true?"A":"U/A"}</span><span style={{paddingLeft:"2%"}} onClick={()=>handleTrail()}><YouTubeIcon style={{color:"white",fontSize:"20px"}}/><span style={{fontSize:"25px"}}> Trailer</span></span></div>
+                    <div style={{color:"white",paddingBottom:"2%",paddingTop:"2%"}}><GradeIcon style={{fontSize:"15px"}}/> {bool.vote_average!==undefined?<span style={{fontSize:"20px",paddingRight:"2%"}}>{bool.vote_average}</span>:<span style={{fontSize:"25px",paddingRight:"2%"}}>N/A</span>}{bool.release_date!==undefined?<span><CalendarTodayIcon style={{fontSize:"15px"}}/> {bool.release_date}</span>:<span><CalendarTodayIcon style={{fontSize:"15px"}}/> N/A</span>}<span style={{color:"white",fontSize:"25px",paddingLeft:"2%"}}>{bool.adult===true?"A":"U/A"}</span><span style={{paddingLeft:"2%"}} onClick={()=>handleTrail()}><YouTubeIcon style={{color:"white",fontSize:"20px"}}/><span style={{fontSize:"25px"}}> Trailer</span></span></div>
                             <div style={{color:"white",fontSize:"20px",width:"1030px",fontWeight:"lighter"}}>
                                 {bool.overview}
                             </div>

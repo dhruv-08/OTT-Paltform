@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Row from "./Row"
 import request from "../request";
 import Banner from './Banner';
-import axios from '../Axios/axios'
 import Nav from './Nav';
 function Main() {
     return (

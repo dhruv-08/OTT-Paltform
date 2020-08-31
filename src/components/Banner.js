@@ -9,7 +9,6 @@ import { Dialog, DialogContent, DialogContentText, DialogTitle } from '@material
 import ReactPlayer from 'react-player'
 import movieTrailer from 'movie-trailer';
 import Slide from '@material-ui/core/Slide';
-const API_KEY = "7e0f5e57c7fdc5e30af84956f6d5a5c8";
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -17,9 +16,7 @@ function Banner() {
     const [movie,setMovie]=useState([]);
     const [movies,setmovies]=useState([]);
     const [success,setsuccess]=useState(false);
-    const [bool, setbool] = useState([]);
     const [trailer, settrailer] = useState("");
-    const [sim, setsim] = useState([])
     const [err,seterr]=useState(false);
     const [tt,settt]=useState(false);
     const [openn, setOpenn] =useState(false);
@@ -30,13 +27,7 @@ function Banner() {
             settrailer(url);
         }).catch(err=>{
             console.log("Done");
-        });
-            setbool(movie);
-        getData();
-        async function getData(){
-            const find=await axios.get(`/movie/${movie.id}/similar?api_key=${API_KEY}&language=en-US&page=1`)
-            setsim(find.data.results.slice(0,9));
-        }    
+        });   
     }
     const handleClos = () => {
         setOpenn(false);

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../nav.css'
 import { Link, useHistory} from 'react-router-dom';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Divider, Grid, Menu, MenuItem } from '@material-ui/core';
 import Axios from 'axios';
 import ListIcon from '@material-ui/icons/List';
@@ -57,7 +56,7 @@ function Nav({check}) {
         onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
       >
-        <div><img src={process.env.PUBLIC_URL+"/logo.png"} style={{width:"30px",paddingTop:"7%",paddingLeft:"7%"}}/><span style={{fontSize:"25px",paddingLeft:"5%"}}>Welcome</span></div>
+        <div><img src={process.env.PUBLIC_URL+"/logo.png"} alt="hello" style={{width:"30px",paddingTop:"7%",paddingLeft:"7%"}}/><span style={{fontSize:"25px",paddingLeft:"5%"}}>Welcome</span></div>
         <Divider/>
         <div className="sc" data-simplebar>
         <List>
@@ -180,7 +179,7 @@ function Nav({check}) {
           </div></Grid>
             </Grid></div><span style={{display:"flex",paddingLeft:"77%"}}>
               <div style={{paddingTop:"2%",paddingRight:"2%",fontSize:"35px"}}>
-            <img aria-controls="simple-menu"aria-haspopup="true" onClick={handleClick} src={process.env.PUBLIC_URL+"/logo.png"} style={{width:"28px"}}/></div>
+            <img aria-controls="simple-menu"aria-haspopup="true" onClick={handleClick} src={process.env.PUBLIC_URL+"/logo.png"} alt="hello" style={{width:"28px"}}/></div>
             <Menu
             id="simple-menu"
             anchorEl={anchorEl}

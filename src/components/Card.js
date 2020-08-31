@@ -32,7 +32,7 @@ function Card() {
                             <div style={{display:"flex",justifyContent:"space-between"}}><span style={{color:"white",paddingBottom:"4%",fontWeight:"lighter",paddingTop:"2%",fontSize:"30px"}}>{movie?.title || movie?.name || movie?.original_name}</span>
                             <CloseIcon style={{color:"white",fontSize:"20px",paddingRight:"2%",paddingTop:"2%"}}/>
                             </div>
-                    <div style={{color:"white",paddingBottom:"2%"}}><GradeIcon style={{fontSize:"15px"}}/> {movie.vote_average!=undefined?<span style={{fontSize:"20px",paddingRight:"2%"}}>{movie.vote_average}</span>:<span style={{fontSize:"20px",paddingRight:"2%"}}>N/A</span>}{movie.release_date!==undefined?<span><CalendarTodayIcon style={{fontSize:"15px"}}/> {movie.release_date}</span>:<span><CalendarTodayIcon style={{fontSize:"15px"}}/> N/A</span>}</div>
+                    <div style={{color:"white",paddingBottom:"2%"}}><GradeIcon style={{fontSize:"15px"}}/> {movie.vote_average!==undefined?<span style={{fontSize:"20px",paddingRight:"2%"}}>{movie.vote_average}</span>:<span style={{fontSize:"20px",paddingRight:"2%"}}>N/A</span>}{movie.release_date!==undefined?<span><CalendarTodayIcon style={{fontSize:"15px"}}/> {movie.release_date}</span>:<span><CalendarTodayIcon style={{fontSize:"15px"}}/> N/A</span>}</div>
                             <div style={{color:"white",width:"400px",fontWeight:"lighter"}}>
                                 {movie.overview}
                             </div>

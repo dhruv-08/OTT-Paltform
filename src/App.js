@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import Login from './components/Login';
+import React from "react";
 import Main from './components/Main';
 import Lis from './components/Lis';
 import Change from './components/Change';
 import Profile from './components/Profile';
-import Forget from './components/Forget';
 import Card from './components/Card';
-import Set from './components/Set';
-import {Switch,Route, Redirect} from 'react-router-dom'
+import {Switch,Route,Redirect} from 'react-router-dom'
 import Search from "./components/Search";
 import Action from "./components/Action";
 import Sci from "./components/Sci";
