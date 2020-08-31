@@ -92,7 +92,7 @@ function Form() {
       <header style={{backgroundImage:`url(${process.env.PUBLIC_URL + `/head.jpg`})`,boxShadow:" inset 900px 2px 500px 2px #111,inset -141px 3px 175px 15px",height:"100vh",backgroundSize:"cover"}}>
         <Grid container>
           <Grid item xs={5}>
-              <div style={{color:"white",paddingTop:"38%",paddingLeft:"4%"}}><span style={{fontSize:"50px"}}>Welcome to Movies Talk</span><br/><span style={{fontSize:"20px",fontWeight:"lighter",letterSpacing:"3px",width:"500px",lineHeight:"30px"}}>Get commercial-free access to exclusive hit series, star-studded movies and more - there's something for every mood in just ₹100</span></div>
+              <div style={{color:"white",paddingTop:"38%",paddingLeft:"4%"}}><span style={{fontSize:"50px"}}>Welcome to Movies Talk</span><br/><span style={{fontSize:"20px",fontWeight:"lighter",letterSpacing:"3px",width:"500px",lineHeight:"30px"}}>Get commercial-free access to exclusive hit series, star-studded movies and more - there's something for every mood in just ₹100/month</span></div>
           </Grid>
           <Grid item xs={2}></Grid>
           <Grid item xs={5}>

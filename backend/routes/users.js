@@ -142,54 +142,9 @@ router.post('/login', (req, res) => {
       }
   })
 });
-var em="";
-router.post('/forgot',(req,res,next)=>{
-  User.findOne({email:req.body.email})
-  .then((user)=>{
-    var transport=nodemailer.createTransport({
-      service:'gmail',
-      auth:{
-        user:process.env.APP_EMAIL,
-        pass:process.env.APP_PASS
-      }
-    });
-    var mailOption={
-      form:process.env.APP_EMAIL,
-      to:user.email,
-      subject:'Reset password',
-      text:'RESET PASSWORD',
-      html:'<a href="http://localhost:3000/set">localhost:3000/set</a>'
-    };
-    transport.sendMail(mailOption,function(err){
-      if(err){
-        console.log(err);
-        res.end('DONE!');
-      }
-      else{
-        console.log('Email sent!!');
-        res.end('DONE!');
-      }
-    });
-    em=req.body.email;
-  })
-  .catch((err)=>{
-    next(err);
-  });
-});
-router.post('/set',(req,res,next)=>{
-  User.findOne({email:em})
-  .then((user)=>{
-    user.setPassword(req.body.newpass,function(err){
-      if(err){
-        res.send(err);
-      }
-      user.save();
-      res.send("DONE!!");
-      em="";
-    });
+router.get("/ses",(req,res,next)=>{
+  res.send(req.session.passport);
 })
-.catch((err)=>next(err));
-});
 router.post('/updatePassword',(req,res,next)=>{
     User.findOne({username:req.session.passport.user})
     .then((user)=>{

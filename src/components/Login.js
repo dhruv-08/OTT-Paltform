@@ -142,7 +142,7 @@ function Login() {
                <Grid item xs={4}></Grid>
                    <Grid item xs={2} >
                    <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
-                   <form noValidate autoComplete="off" onSubmit={(e)=>(handleLogin(e))} style={{paddingTop:"15%",paddingLeft:"20%",boxShadow:"0px 10px 30px -5px rgba(0, 0, 0, 0.5)",width:"450px",height:"420px",borderRadius:"15px",backgroundColor:"white",color:"black"}}>
+                   <form noValidate autoComplete="off" onSubmit={(e)=>(handleLogin(e))} style={{paddingTop:"15%",paddingLeft:"20%",boxShadow:"0px 10px 30px -5px rgba(0, 0, 0, 0.5)",width:"450px",height:"400px",borderRadius:"15px",backgroundColor:"white",color:"black"}}>
                        <h1 className="log">Log-In <LockOpenIcon style={{fontSize:"25px"}}/></h1><br/>
                        <TextField id="outlined-basic" label="Username*" variant="outlined" value={loguser} name="username" onChange={(e)=>setloguser(e.target.value)} style={{width:"400px"}}/><br/><br/>
                        <TextField id="outlined-basic" label="Email*" variant="outlined" value={logemail} name="email" onChange={(e)=>setlogemail(e.target.value)} style={{width:"400px"}}/><br/><br/>
@@ -169,8 +169,7 @@ function Login() {
                        </FormControl><br/><br/>
                        <div style={{textAlign:"justify"}}>
                        <Button disabled={!loguser || !logpass} type="submit" variant="contained" color="primary" >LogIn<Icon style={{paddingLeft:"2%"}}/>
-                       </Button><span style={{color:"red",paddingLeft:"35%"}} onClick={()=>setisFlipped(!isFlipped)}>Not Registered Yet?</span></div><br/>
-                       <Link to="/forget" style={{textDecoration:"none",color:"red"}}>Forgot password ?</Link>
+                       </Button><span style={{color:"red",paddingLeft:"35%"}} onClick={()=>setisFlipped(!isFlipped)}>Not Registered Yet?</span></div>
                        </form>
                <form noValidate autoComplete="off" onSubmit={(e)=>handleSignup(e)} style={{paddingTop:"15%",paddingLeft:"20%",boxShadow:"0px 10px 30px -5px rgba(0, 0, 0, 0.5)",width:"450px",height:"400px",borderRadius:"15px",backgroundColor:"white",color:"black"}}>
                    <h1 className="sign" style={{color:"black"}}>Sign-Up <ExitToAppIcon style={{fontSize:"25px",color:"black"}}/></h1><br/>
