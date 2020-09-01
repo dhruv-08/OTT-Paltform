@@ -53,7 +53,6 @@ function Form() {
       }
       else{
         const res=await axios.post('/sub',{'payment_method':result.paymentMethod.id,'email':email})
-        console.log(res.data);
         const status=res.data.status;
         if(status==='succeeded'){
             console.log('Subscribed Successfully!');

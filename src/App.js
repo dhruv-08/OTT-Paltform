@@ -1,7 +1,6 @@
 import React from "react";
 import {Switch,Route,Redirect} from 'react-router-dom'
 import Checkout from "./Stripe/Checkout";
-import LoginProtect from "./Protected/LoginProtect";
 import HomeProtect from "./Protected/HomeProtect";
 import ActionProtect from "./Protected/ActionProtect";
 import SciProtect from "./Protected/SciProtect";
@@ -22,12 +21,13 @@ import LisProtect from "./Protected/LisProtect";
 import ProfileProtect from "./Protected/ProfileProtect";
 import ChangeProtect from "./Protected/ChangeProtect";
 import SearchProtect from "./Protected/SearchProtect";
+import Login from "./components/Login";
 function App() {  
   return( 
       <div>
         {/* <Main/> */}
         <Switch>
-                <Route exact path="/" component={()=><LoginProtect/>}/>
+                <Route exact path="/" component={()=><Login/>}/>
                 <Route exact path="/home" component={()=><HomeProtect/>}/>
                 <Route exact path="/action" component={()=><ActionProtect/>}/>
                 <Route exact path="/sci_fi" component={()=><SciProtect/>}/>
