@@ -13,7 +13,6 @@ function SciProtect() {
           else{
             setsession(true);
           }
-          console.log(res);
         }).catch(err=>{
           console.log(err);
         })

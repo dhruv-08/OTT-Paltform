@@ -13,7 +13,6 @@ function AnimatedProtect() {
           else{
             setsession(true);
           }
-          console.log(res);
         }).catch(err=>{
           console.log(err);
         })

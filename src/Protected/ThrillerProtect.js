@@ -13,7 +13,6 @@ function ThrillerProtect() {
           else{
             setsession(true);
           }
-          console.log(res);
         }).catch(err=>{
           console.log(err);
         })

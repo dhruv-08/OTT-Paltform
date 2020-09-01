@@ -15,7 +15,7 @@ import AddIcon from '@material-ui/icons/Add';
 import ReactPlayer from 'react-player'
 import Slide from '@material-ui/core/Slide';
 import YouTubeIcon from '@material-ui/icons/YouTube';
-const API_KEY = "7e0f5e57c7fdc5e30af84956f6d5a5c8";
+const API_KEY = process.env.REACT_APP_API;
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -113,7 +113,7 @@ function Row({title,fetch,large}) {
            <div className="row_posters">
                 <FlipMove>
             {movies.map(movie=>(
-                   movie.backdrop_path?<img key={movie?.id} src={`${baseURL}${large===true?movie?.poster_path:movie?.backdrop_path}`} alt={movie?.title} className={large===true?"row_large":"row_poster"} onClick={()=>handleModal(movie)}/>:<div key={movie.id}>{console.log(movie?.name||movie?.title)}</div>
+                   movie.backdrop_path?<img key={movie?.id} src={`${baseURL}${large===true?movie?.poster_path:movie?.backdrop_path}`} alt={movie?.title} className={large===true?"row_large":"row_poster"} onClick={()=>handleModal(movie)}/>:<div key={movie.id}></div>
             ))}
             </FlipMove>
             </div>

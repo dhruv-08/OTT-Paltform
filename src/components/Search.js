@@ -18,7 +18,7 @@ import Slide from '@material-ui/core/Slide';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import ReactPlayer from 'react-player';
 import Axios from 'axios';
-const API_KEY = "7e0f5e57c7fdc5e30af84956f6d5a5c8";
+const API_KEY = process.env.REACT_APP_API;
 const baseURL="https://image.tmdb.org/t/p/original";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;

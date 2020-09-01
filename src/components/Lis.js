@@ -16,7 +16,7 @@ import Axios from 'axios';
 import { Helmet } from 'react-helmet';
 import '../list.css'
 const baseURL="https://image.tmdb.org/t/p/original";
-const API_KEY = "7e0f5e57c7fdc5e30af84956f6d5a5c8";
+const API_KEY = process.env.REACT_APP_API;
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });

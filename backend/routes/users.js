@@ -3,13 +3,11 @@ var router = express.Router();
 var User=require('../models/user');
 var bodyParser=require('body-parser');
 var passport=require('passport');
-var nodemailer=require('nodemailer');
-const stripe = require('stripe')('sk_test_51HKVO4AfnE0MoBcQjLsMVIqWxJ5xz1ax2XS9enr30OlbbilhdZ5p7CKZjXf1z9FeuQq2YuIsfJTFpi4gTe83Jg0o000R5HBLmW');
 const { authenticate } = require('passport');
 /* GET users listing. */
 router.use(bodyParser.json());
 require('dotenv').config();
-
+const stripe = require('stripe')(process.env.API_KEY);
 router.post('/pay', async (req, res) => {
   const {email} = req.body;
   const paymentIntent = await stripe.paymentIntents.create({

@@ -1,4 +1,4 @@
-const API_KEY = "7e0f5e57c7fdc5e30af84956f6d5a5c8";
+const API_KEY = process.env.REACT_APP_API;
 const request = {
   Upcoming: `/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`,
   Trending: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
