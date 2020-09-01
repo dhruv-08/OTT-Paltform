@@ -47,7 +47,7 @@ function Login() {
     };
     function handleSignup(e){
         e.preventDefault();
-        Axios.post("/signup",{username:user,password:pass,email:em},{timeout:2000})
+        Axios.post("/signup",{username:user,password:pass,email:em})
         .then(res=>{
             setuser("");
             setpass("");
