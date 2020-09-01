@@ -1,9 +1,8 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import Login from '../components/Login';
-import Main from '../components/Main';
+import Action from '../components/Action';
 
-function LoginProtect() {
+function ActionProtect() {
     const [session, setsession] = useState(false)
     useEffect(() => {
         Axios.get("/ses")
@@ -22,9 +21,9 @@ function LoginProtect() {
       }, [])
     return (
         <div>
-            {session===true?<Main/>:<Login/>}
+            {session===true && <Action/>}
         </div>
     )
 }
 
-export default LoginProtect
+export default ActionProtect
